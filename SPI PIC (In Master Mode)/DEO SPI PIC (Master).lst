@@ -1,0 +1,2507 @@
+
+
+HI-TECH Software PIC LITE Macro Assembler V9.83 build 10920 
+                                                                                               Wed Mar 20 15:57:11 2013
+
+HI-TECH Software Omniscient Code Generator (Lite mode) build 10920
+     1  0000                     opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 10920"
+     2                           
+     3                           opt pagewidth 120
+     4                           
+     5                           	opt lm
+     6                           
+     7                           	processor	16F877A
+     8                           clrc	macro
+     9                           	bcf	3,0
+    10  0000                     	endm
+    11                           clrz	macro
+    12                           	bcf	3,2
+    13  0000                     	endm
+    14                           setc	macro
+    15                           	bsf	3,0
+    16  0000                     	endm
+    17                           setz	macro
+    18                           	bsf	3,2
+    19  0000                     	endm
+    20                           skipc	macro
+    21                           	btfss	3,0
+    22  0000                     	endm
+    23                           skipz	macro
+    24                           	btfss	3,2
+    25  0000                     	endm
+    26                           skipnc	macro
+    27                           	btfsc	3,0
+    28  0000                     	endm
+    29                           skipnz	macro
+    30                           	btfsc	3,2
+    31  0000                     	endm
+    32  0000                     indf	equ	0
+    33  0000                     indf0	equ	0
+    34  0002                     pc	equ	2
+    35  0002                     pcl	equ	2
+    36  0003                     status	equ	3
+    37  0004                     fsr	equ	4
+    38  0004                     fsr0	equ	4
+    39  0001                     c	equ	1
+    40  0000                     z	equ	0
+    41  000A                     pclath	equ	10
+    42                           # 16 "C:\Users\Alex\Dropbox\UWE\UWE Final Year\co-design VHDL\Code\14b - Deo SPI PIC (Ma
+                                 ster)\main.c"
+    43                           	psect config,class=CONFIG,delta=2 ;#
+    44                           # 16 "C:\Users\Alex\Dropbox\UWE\UWE Final Year\co-design VHDL\Code\14b - Deo SPI PIC (Ma
+                                 ster)\main.c"
+    45  2007  FF3A               	dw 0xFFFE & 0xFFFB & 0xFFFF & 0xFFFF & 0xFFFF & 0xFFBF & 0xFF7F ;#
+    46                           	FNCALL	_main,_Master_Initialisation
+    47                           	FNCALL	_main,_Send_MS
+    48                           	FNCALL	_Send_MS,_SPI_Write
+    49                           	FNCALL	_Send_MS,_SPI_Read
+    50                           	FNCALL	_Send_MS,_Decode_SM
+    51                           	FNCALL	_Send_MS,___awtoft
+    52                           	FNCALL	_Send_MS,_Delay
+    53                           	FNCALL	_Send_MS,_Clear_LEDs
+    54                           	FNCALL	_Decode_SM,___awtoft
+    55                           	FNCALL	_Decode_SM,_Delay
+    56                           	FNCALL	_Decode_SM,_Clear_LEDs
+    57                           	FNCALL	_Delay,___awtoft
+    58                           	FNCALL	_Delay,___ftge
+    59                           	FNCALL	___awtoft,___ftpack
+    60                           	FNROOT	_main
+    61                           	global	_SPI_Return
+    62                           	global	_left_joy_h
+    63                           	global	_left_joy_v
+    64                           	global	_PORTB
+    65                           psect	text294,local,class=CODE,delta=2
+    66                           global __ptext294
+    67  0000                     __ptext294:
+    68  0006                     _PORTB	set	6
+    69                           	global	_PORTC
+    70  0007                     _PORTC	set	7
+    71                           	global	_PORTD
+    72  0008                     _PORTD	set	8
+    73                           	global	_SSPBUF
+    74  0013                     _SSPBUF	set	19
+    75                           	global	_SSPCON
+    76  0014                     _SSPCON	set	20
+    77                           	global	_CARRY
+    78  0018                     _CARRY	set	24
+    79                           	global	_GIE
+    80  005F                     _GIE	set	95
+    81                           	global	_RB0
+    82  0030                     _RB0	set	48
+    83                           	global	_RB1
+    84  0031                     _RB1	set	49
+    85                           	global	_RB2
+    86  0032                     _RB2	set	50
+    87                           	global	_RB3
+    88  0033                     _RB3	set	51
+    89                           	global	_RB4
+    90  0034                     _RB4	set	52
+    91                           	global	_RB5
+    92  0035                     _RB5	set	53
+    93                           	global	_RC3
+    94  003B                     _RC3	set	59
+    95                           	global	_RC4
+    96  003C                     _RC4	set	60
+    97                           	global	_RC5
+    98  003D                     _RC5	set	61
+    99                           	global	_RC6
+   100  003E                     _RC6	set	62
+   101                           	global	_RC7
+   102  003F                     _RC7	set	63
+   103                           	global	_RD2
+   104  0042                     _RD2	set	66
+   105                           	global	_RD3
+   106  0043                     _RD3	set	67
+   107                           	global	_RD4
+   108  0044                     _RD4	set	68
+   109                           	global	_RD5
+   110  0045                     _RD5	set	69
+   111                           	global	_RD6
+   112  0046                     _RD6	set	70
+   113                           	global	_SSPSTAT
+   114  0094                     _SSPSTAT	set	148
+   115                           	global	_SSPSTATbits
+   116  0094                     _SSPSTATbits	set	148
+   117                           	global	_TRISA
+   118  0085                     _TRISA	set	133
+   119                           	global	_TRISB
+   120  0086                     _TRISB	set	134
+   121                           	global	_TRISC
+   122  0087                     _TRISC	set	135
+   123                           	global	_TRISD
+   124  0088                     _TRISD	set	136
+   125                           	global	_EEADR
+   126  010D                     _EEADR	set	269
+   127                           	global	_EEDATA
+   128  010C                     _EEDATA	set	268
+   129                           	global	_EECON1
+   130  018C                     _EECON1	set	396
+   131                           	global	_EECON2
+   132  018D                     _EECON2	set	397
+   133                           	global	_RD
+   134  0C60                     _RD	set	3168
+   135                           	global	_WR
+   136  0C61                     _WR	set	3169
+   137                           	global	_WREN
+   138  0C62                     _WREN	set	3170
+   139                           	file	"DEO SPI PIC (Master).as"
+   140                           	line	#
+   141                           psect cinit,class=CODE,delta=2
+   142                           global start_initialization
+   143  04D7                     start_initialization:
+   144                           
+   145                           psect	bssBANK0,class=BANK0,space=1
+   146                           global __pbssBANK0
+   147  0035                     __pbssBANK0:
+   148  0035                     _SPI_Return:
+   149  0035                            ds      4
+   150                           
+   151  0039                     _left_joy_h:
+   152  0039                            ds      4
+   153                           
+   154  003D                     _left_joy_v:
+   155  003D                            ds      4
+   156                           
+   157                           ; Clear objects allocated to BANK0
+   158                           psect cinit,class=CODE,delta=2
+   159  04D7  01B5               	clrf	((__pbssBANK0)+0)&07Fh
+   160  04D8  01B6               	clrf	((__pbssBANK0)+1)&07Fh
+   161  04D9  01B7               	clrf	((__pbssBANK0)+2)&07Fh
+   162  04DA  01B8               	clrf	((__pbssBANK0)+3)&07Fh
+   163  04DB  01B9               	clrf	((__pbssBANK0)+4)&07Fh
+   164  04DC  01BA               	clrf	((__pbssBANK0)+5)&07Fh
+   165  04DD  01BB               	clrf	((__pbssBANK0)+6)&07Fh
+   166  04DE  01BC               	clrf	((__pbssBANK0)+7)&07Fh
+   167  04DF  01BD               	clrf	((__pbssBANK0)+8)&07Fh
+   168  04E0  01BE               	clrf	((__pbssBANK0)+9)&07Fh
+   169  04E1  01BF               	clrf	((__pbssBANK0)+10)&07Fh
+   170  04E2  01C0               	clrf	((__pbssBANK0)+11)&07Fh
+   171                           psect cinit,class=CODE,delta=2
+   172                           global end_of_initialization
+   173                           
+   174                           ;End of C runtime variable initialization code
+   175                           
+   176  04E3                     end_of_initialization:
+   177  04E3  0183               clrf status
+   178  04E4  120A  118A  2CC9   ljmp _main	;jump to C main() function
+   179                           psect	cstackCOMMON,class=COMMON,space=1
+   180                           global __pcstackCOMMON
+   181  0070                     __pcstackCOMMON:
+   182                           	global	?_Master_Initialisation
+   183  0070                     ?_Master_Initialisation:	; 0 bytes @ 0x0
+   184                           	global	??_Master_Initialisation
+   185  0070                     ??_Master_Initialisation:	; 0 bytes @ 0x0
+   186                           	global	?_Send_MS
+   187  0070                     ?_Send_MS:	; 0 bytes @ 0x0
+   188                           	global	?_main
+   189  0070                     ?_main:	; 0 bytes @ 0x0
+   190                           	global	?_Clear_LEDs
+   191  0070                     ?_Clear_LEDs:	; 0 bytes @ 0x0
+   192                           	global	??_Clear_LEDs
+   193  0070                     ??_Clear_LEDs:	; 0 bytes @ 0x0
+   194                           	global	?_SPI_Write
+   195  0070                     ?_SPI_Write:	; 0 bytes @ 0x0
+   196                           	global	??_SPI_Write
+   197  0070                     ??_SPI_Write:	; 0 bytes @ 0x0
+   198                           	global	?_SPI_Read
+   199  0070                     ?_SPI_Read:	; 0 bytes @ 0x0
+   200                           	global	??_SPI_Read
+   201  0070                     ??_SPI_Read:	; 0 bytes @ 0x0
+   202                           	global	?_Decode_SM
+   203  0070                     ?_Decode_SM:	; 0 bytes @ 0x0
+   204                           	global	?___ftpack
+   205  0070                     ?___ftpack:	; 3 bytes @ 0x0
+   206                           	global	SPI_Write@data_1
+   207  0070                     SPI_Write@data_1:	; 1 bytes @ 0x0
+   208                           	global	___ftpack@arg
+   209  0070                     ___ftpack@arg:	; 3 bytes @ 0x0
+   210  0070                     	ds	3
+   211                           	global	___ftpack@exp
+   212  0073                     ___ftpack@exp:	; 1 bytes @ 0x3
+   213  0073                     	ds	1
+   214                           	global	___ftpack@sign
+   215  0074                     ___ftpack@sign:	; 1 bytes @ 0x4
+   216  0074                     	ds	1
+   217                           	global	??___ftpack
+   218  0075                     ??___ftpack:	; 0 bytes @ 0x5
+   219  0075                     	ds	3
+   220                           	global	?___ftge
+   221  0078                     ?___ftge:	; 1 bit 
+   222                           	global	___ftge@ff1
+   223  0078                     ___ftge@ff1:	; 3 bytes @ 0x8
+   224  0078                     	ds	3
+   225                           	global	___ftge@ff2
+   226  007B                     ___ftge@ff2:	; 3 bytes @ 0xB
+   227  007B                     	ds	3
+   228                           	global	??_Send_MS
+   229  007E                     ??_Send_MS:	; 0 bytes @ 0xE
+   230                           	global	??_main
+   231  007E                     ??_main:	; 0 bytes @ 0xE
+   232                           	global	??_Delay
+   233  007E                     ??_Delay:	; 0 bytes @ 0xE
+   234                           	global	??_Decode_SM
+   235  007E                     ??_Decode_SM:	; 0 bytes @ 0xE
+   236                           psect	cstackBANK0,class=BANK0,space=1
+   237                           global __pcstackBANK0
+   238  0020                     __pcstackBANK0:
+   239                           	global	??___ftge
+   240  0020                     ??___ftge:	; 0 bytes @ 0x0
+   241  0020                     	ds	6
+   242                           	global	?___awtoft
+   243  0026                     ?___awtoft:	; 3 bytes @ 0x6
+   244                           	global	___awtoft@c
+   245  0026                     ___awtoft@c:	; 2 bytes @ 0x6
+   246  0026                     	ds	3
+   247                           	global	??___awtoft
+   248  0029                     ??___awtoft:	; 0 bytes @ 0x9
+   249  0029                     	ds	2
+   250                           	global	___awtoft@sign
+   251  002B                     ___awtoft@sign:	; 1 bytes @ 0xB
+   252  002B                     	ds	1
+   253                           	global	?_Delay
+   254  002C                     ?_Delay:	; 0 bytes @ 0xC
+   255                           	global	Delay@delay_time
+   256  002C                     Delay@delay_time:	; 3 bytes @ 0xC
+   257  002C                     	ds	3
+   258                           	global	Delay@a
+   259  002F                     Delay@a:	; 2 bytes @ 0xF
+   260  002F                     	ds	2
+   261                           	global	Decode_SM@DT
+   262  0031                     Decode_SM@DT:	; 2 bytes @ 0x11
+   263  0031                     	ds	2
+   264                           	global	Send_MS@DT
+   265  0033                     Send_MS@DT:	; 2 bytes @ 0x13
+   266  0033                     	ds	2
+   267 ;;Data sizes: Strings 0, constant 0, data 0, bss 12, persistent 0 stack 0
+   268 ;;Auto spaces:   Size  Autos    Used
+   269 ;; COMMON          14     14      14
+   270 ;; BANK0           80     21      33
+   271 ;; BANK1           80      0       0
+   272 ;; BANK3           96      0       0
+   273 ;; BANK2           96      0       0
+   274                           
+   275 ;;
+   276 ;; Pointer list with targets:
+   277                           
+   278 ;; ?___ftpack	float  size(1) Largest target is 0
+   279 ;;
+   280 ;; ?___awtoft	float  size(1) Largest target is 0
+   281 ;;
+   282                           
+   283                           
+   284 ;;
+   285 ;; Critical Paths under _main in COMMON
+   286 ;;
+   287 ;;   _Delay->___ftge
+   288 ;;   ___awtoft->___ftge
+   289 ;;   ___ftge->___ftpack
+   290 ;;
+   291 ;; Critical Paths under _main in BANK0
+   292 ;;
+   293 ;;   _main->_Send_MS
+   294 ;;   _Send_MS->_Decode_SM
+   295 ;;   _Decode_SM->_Delay
+   296 ;;   _Delay->___awtoft
+   297 ;;   ___awtoft->___ftge
+   298 ;;
+   299 ;; Critical Paths under _main in BANK1
+   300 ;;
+   301 ;;   None.
+   302 ;;
+   303 ;; Critical Paths under _main in BANK3
+   304 ;;
+   305 ;;   None.
+   306 ;;
+   307 ;; Critical Paths under _main in BANK2
+   308 ;;
+   309 ;;   None.
+   310                           
+   311 ;;
+   312 ;;Main: autosize = 0, tempsize = 0, incstack = 0, save=0
+   313 ;;
+   314                           
+   315 ;;
+   316 ;;Call Graph Tables:
+   317 ;;
+   318 ;; ---------------------------------------------------------------------------------
+   319 ;; (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+   320 ;; ---------------------------------------------------------------------------------
+   321 ;; (0) _main                                                 0     0      0    1678
+   322 ;;              _Master_Initialisation
+   323 ;;                            _Send_MS
+   324 ;; ---------------------------------------------------------------------------------
+   325 ;; (1) _Send_MS                                              2     2      0    1678
+   326 ;;                                             19 BANK0      2     2      0
+   327 ;;                          _SPI_Write
+   328 ;;                           _SPI_Read
+   329 ;;                          _Decode_SM
+   330 ;;                           ___awtoft
+   331 ;;                              _Delay
+   332 ;;                         _Clear_LEDs
+   333 ;; ---------------------------------------------------------------------------------
+   334 ;; (2) _Decode_SM                                            2     2      0     828
+   335 ;;                                             17 BANK0      2     2      0
+   336 ;;                           ___awtoft
+   337 ;;                              _Delay
+   338 ;;                         _Clear_LEDs
+   339 ;; ---------------------------------------------------------------------------------
+   340 ;; (2) _Delay                                                5     2      3     483
+   341 ;;                                             12 BANK0      5     2      3
+   342 ;;                           ___awtoft
+   343 ;;                             ___ftge
+   344 ;; ---------------------------------------------------------------------------------
+   345 ;; (3) ___awtoft                                             6     3      3     300
+   346 ;;                                              6 BANK0      6     3      3
+   347 ;;                           ___ftpack
+   348 ;;                             ___ftge (ARG)
+   349 ;; ---------------------------------------------------------------------------------
+   350 ;; (3) ___ftge                                              12     6      6     136
+   351 ;;                                              8 COMMON     6     0      6
+   352 ;;                                              0 BANK0      6     6      0
+   353 ;;                           ___ftpack (ARG)
+   354 ;; ---------------------------------------------------------------------------------
+   355 ;; (4) ___ftpack                                             8     3      5     209
+   356 ;;                                              0 COMMON     8     3      5
+   357 ;; ---------------------------------------------------------------------------------
+   358 ;; (2) _SPI_Read                                             4     4      0       0
+   359 ;;                                              0 COMMON     4     4      0
+   360 ;; ---------------------------------------------------------------------------------
+   361 ;; (2) _SPI_Write                                            1     1      0      22
+   362 ;;                                              0 COMMON     1     1      0
+   363 ;; ---------------------------------------------------------------------------------
+   364 ;; (2) _Clear_LEDs                                           0     0      0       0
+   365 ;; ---------------------------------------------------------------------------------
+   366 ;; (1) _Master_Initialisation                                0     0      0       0
+   367 ;; ---------------------------------------------------------------------------------
+   368 ;; Estimated maximum stack depth 4
+   369 ;; ---------------------------------------------------------------------------------
+   370                           
+   371 ;; Call Graph Graphs:
+   372                           
+   373 ;; _main (ROOT)
+   374 ;;   _Master_Initialisation
+   375 ;;   _Send_MS
+   376 ;;     _SPI_Write
+   377 ;;     _SPI_Read
+   378 ;;     _Decode_SM
+   379 ;;       ___awtoft
+   380 ;;         ___ftpack
+   381 ;;         ___ftge (ARG)
+   382 ;;           ___ftpack (ARG)
+   383 ;;       _Delay
+   384 ;;         ___awtoft
+   385 ;;           ___ftpack
+   386 ;;           ___ftge (ARG)
+   387 ;;             ___ftpack (ARG)
+   388 ;;         ___ftge
+   389 ;;           ___ftpack (ARG)
+   390 ;;       _Clear_LEDs
+   391 ;;     ___awtoft
+   392 ;;       ___ftpack
+   393 ;;       ___ftge (ARG)
+   394 ;;         ___ftpack (ARG)
+   395 ;;     _Delay
+   396 ;;       ___awtoft
+   397 ;;         ___ftpack
+   398 ;;         ___ftge (ARG)
+   399 ;;           ___ftpack (ARG)
+   400 ;;       ___ftge
+   401 ;;         ___ftpack (ARG)
+   402 ;;     _Clear_LEDs
+   403 ;;
+   404                           
+   405 ;; Address spaces:
+   406                           
+   407 ;;Name               Size   Autos  Total    Cost      Usage
+   408 ;;BITCOMMON            E      0       0       0        0.0%
+   409 ;;EEDATA             100      0       0       0        0.0%
+   410 ;;NULL                 0      0       0       0        0.0%
+   411 ;;CODE                 0      0       0       0        0.0%
+   412 ;;COMMON               E      E       E       1      100.0%
+   413 ;;BITSFR0              0      0       0       1        0.0%
+   414 ;;SFR0                 0      0       0       1        0.0%
+   415 ;;BITSFR1              0      0       0       2        0.0%
+   416 ;;SFR1                 0      0       0       2        0.0%
+   417 ;;STACK                0      0       5       2        0.0%
+   418 ;;ABS                  0      0      2F       3        0.0%
+   419 ;;BITBANK0            50      0       0       4        0.0%
+   420 ;;BITSFR3              0      0       0       4        0.0%
+   421 ;;SFR3                 0      0       0       4        0.0%
+   422 ;;BANK0               50     15      21       5       41.3%
+   423 ;;BITSFR2              0      0       0       5        0.0%
+   424 ;;SFR2                 0      0       0       5        0.0%
+   425 ;;BITBANK1            50      0       0       6        0.0%
+   426 ;;BANK1               50      0       0       7        0.0%
+   427 ;;BITBANK3            60      0       0       8        0.0%
+   428 ;;BANK3               60      0       0       9        0.0%
+   429 ;;BITBANK2            60      0       0      10        0.0%
+   430 ;;BANK2               60      0       0      11        0.0%
+   431 ;;DATA                 0      0      34      12        0.0%
+   432                           
+   433                           	global	_main
+   434                           psect	maintext,global,class=CODE,delta=2
+   435                           global __pmaintext
+   436  04C9                     __pmaintext:
+   437                           
+   438 ;; *************** function _main *****************
+   439 ;; Defined at:
+   440 ;;		line 41 in file "C:\Users\Alex\Dropbox\UWE\UWE Final Year\co-design VHDL\Code\14b - Deo SPI PIC (Master)\main.c"
+   441 ;; Parameters:    Size  Location     Type
+   442 ;;		None
+   443 ;; Auto vars:     Size  Location     Type
+   444 ;;		None
+   445 ;; Return value:  Size  Location     Type
+   446 ;;		None               void
+   447 ;; Registers used:
+   448 ;;		wreg, status,2, status,0, pclath, cstack
+   449 ;; Tracked objects:
+   450 ;;		On entry : 17F/0
+   451 ;;		On exit  : 0/0
+   452 ;;		Unchanged: 0/0
+   453 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   454 ;;      Params:         0       0       0       0       0
+   455 ;;      Locals:         0       0       0       0       0
+   456 ;;      Temps:          0       0       0       0       0
+   457 ;;      Totals:         0       0       0       0       0
+   458 ;;Total ram usage:        0 bytes
+   459 ;; Hardware stack levels required when called:    5
+   460 ;; This function calls:
+   461 ;;		_Master_Initialisation
+   462 ;;		_Send_MS
+   463 ;; This function is called by:
+   464 ;;		Startup code after reset
+   465 ;; This function uses a non-reentrant model
+   466 ;;
+   467                           psect	maintext
+   468                           	file	"C:\Users\Alex\Dropbox\UWE\UWE Final Year\co-design VHDL\Code\14b - Deo SPI PIC (M
+                                 aster)\main.c"
+   469                           	line	41
+   470                           	global	__size_of_main
+   471  000E                     	__size_of_main	equ	__end_of_main-_main
+   472                           	
+   473  04C9                     _main:	
+   474                           	opt	stack 3
+   475                           ; Regs used in _main: [wreg+status,2+status,0+pclath+cstack]
+   476                           	line	42
+   477                           	
+   478  04C9                     l5313:	
+   479                           ;main.c: 42: Master_Initialisation();
+   480  04C9  120A  118A  24E7   	fcall	_Master_Initialisation
+              120A  118A         
+   481                           	line	45
+   482                           ;main.c: 44: for(;;)
+   483                           	
+   484  04CE                     l695:	
+   485                           	line	46
+   486                           ;main.c: 45: {
+   487                           ;main.c: 46: Send_MS();
+   488  04CE  120A  118A  266F   	fcall	_Send_MS
+              120A  118A         
+   489                           	line	47
+   490                           ;main.c: 47: }
+   491  04D3  2CCE               	goto	l695
+   492                           	
+   493  04D4                     l696:	
+   494                           	line	48
+   495                           	
+   496  04D4                     l697:	
+   497                           	global	start
+   498  04D4  120A  118A  2800   	ljmp	start
+   499                           	opt stack 0
+   500                           GLOBAL	__end_of_main
+   501  04D7                     	__end_of_main:
+   502 ;; =============== function _main ends ============
+   503                           
+   504                           	signat	_main,88
+   505                           	global	_Send_MS
+   506                           psect	text295,local,class=CODE,delta=2
+   507                           global __ptext295
+   508  066F                     __ptext295:
+   509                           
+   510 ;; *************** function _Send_MS *****************
+   511 ;; Defined at:
+   512 ;;		line 71 in file "C:\Users\Alex\Dropbox\UWE\UWE Final Year\co-design VHDL\Code\14b - Deo SPI PIC (Master)\Read_Create
+       _MSG.c"
+   513 ;; Parameters:    Size  Location     Type
+   514 ;;		None
+   515 ;; Auto vars:     Size  Location     Type
+   516 ;;  DT              2   19[BANK0 ] int 
+   517 ;; Return value:  Size  Location     Type
+   518 ;;		None               void
+   519 ;; Registers used:
+   520 ;;		wreg, status,2, status,0, pclath, cstack
+   521 ;; Tracked objects:
+   522 ;;		On entry : 0/0
+   523 ;;		On exit  : 0/0
+   524 ;;		Unchanged: 0/0
+   525 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   526 ;;      Params:         0       0       0       0       0
+   527 ;;      Locals:         0       2       0       0       0
+   528 ;;      Temps:          0       0       0       0       0
+   529 ;;      Totals:         0       2       0       0       0
+   530 ;;Total ram usage:        2 bytes
+   531 ;; Hardware stack levels used:    1
+   532 ;; Hardware stack levels required when called:    4
+   533 ;; This function calls:
+   534 ;;		_SPI_Write
+   535 ;;		_SPI_Read
+   536 ;;		_Decode_SM
+   537 ;;		___awtoft
+   538 ;;		_Delay
+   539 ;;		_Clear_LEDs
+   540 ;; This function is called by:
+   541 ;;		_main
+   542 ;; This function uses a non-reentrant model
+   543 ;;
+   544                           psect	text295
+   545                           	file	"C:\Users\Alex\Dropbox\UWE\UWE Final Year\co-design VHDL\Code\14b - Deo SPI PIC (M
+                                 aster)\Read_Create_MSG.c"
+   546                           	line	71
+   547                           	global	__size_of_Send_MS
+   548  00BD                     	__size_of_Send_MS	equ	__end_of_Send_MS-_Send_MS
+   549                           	
+   550  066F                     _Send_MS:	
+   551                           	opt	stack 3
+   552                           ; Regs used in _Send_MS: [wreg+status,2+status,0+pclath+cstack]
+   553                           	line	72
+   554                           	
+   555  066F                     l5275:	
+   556                           ;Read_Create_MSG.c: 72: int DT = 1000;
+   557  066F  30E8               	movlw	low(03E8h)
+   558  0670  1283               	bcf	status, 5	;RP0=0, select bank0
+   559  0671  1303               	bcf	status, 6	;RP1=0, select bank0
+   560  0672  00B3               	movwf	(Send_MS@DT)
+   561  0673  3003               	movlw	high(03E8h)
+   562  0674  00B4               	movwf	((Send_MS@DT))+1
+   563                           	line	74
+   564                           	
+   565  0675                     l5277:	
+   566                           ;Read_Create_MSG.c: 74: if (RB4 == 1)
+   567  0675  1E06               	btfss	(52/8),(52)&7
+   568  0676  2E78               	goto	u3181
+   569  0677  2E79               	goto	u3180
+   570  0678                     u3181:
+   571  0678  2E8C               	goto	l5283
+   572  0679                     u3180:
+   573                           	line	76
+   574                           	
+   575  0679                     l5279:	
+   576                           ;Read_Create_MSG.c: 75: {
+   577                           ;Read_Create_MSG.c: 76: RB5 = 1;
+   578  0679  1686               	bsf	(53/8),(53)&7
+   579                           	line	77
+   580                           ;Read_Create_MSG.c: 77: RD6 = 1;
+   581  067A  1708               	bsf	(70/8),(70)&7
+   582                           	line	78
+   583                           	
+   584  067B                     l5281:	
+   585                           ;Read_Create_MSG.c: 78: SPI_Write(0b00000001);
+   586  067B  3001               	movlw	(01h)
+   587  067C  120A  118A  24BB   	fcall	_SPI_Write
+              120A  118A         
+   588                           	line	79
+   589                           ;Read_Create_MSG.c: 79: SPI_Read();
+   590  0681  120A  118A  2501   	fcall	_SPI_Read
+              120A  118A         
+   591                           	line	80
+   592                           ;Read_Create_MSG.c: 80: Decode_SM();
+   593  0686  120A  118A  272C   	fcall	_Decode_SM
+              120A  118A         
+   594  068B  2E8C               	goto	l5283
+   595                           	line	81
+   596                           	
+   597  068C                     l2809:	
+   598                           	line	82
+   599                           	
+   600  068C                     l5283:	
+   601                           ;Read_Create_MSG.c: 81: }
+   602                           ;Read_Create_MSG.c: 82: if (RB3 == 1)
+   603  068C  1283               	bcf	status, 5	;RP0=0, select bank0
+   604  068D  1303               	bcf	status, 6	;RP1=0, select bank0
+   605  068E  1D86               	btfss	(51/8),(51)&7
+   606  068F  2E91               	goto	u3191
+   607  0690  2E92               	goto	u3190
+   608  0691                     u3191:
+   609  0691  2EA5               	goto	l5289
+   610  0692                     u3190:
+   611                           	line	84
+   612                           	
+   613  0692                     l5285:	
+   614                           ;Read_Create_MSG.c: 83: {
+   615                           ;Read_Create_MSG.c: 84: RB5 = 1;
+   616  0692  1686               	bsf	(53/8),(53)&7
+   617                           	line	85
+   618                           ;Read_Create_MSG.c: 85: RD5 = 1;
+   619  0693  1688               	bsf	(69/8),(69)&7
+   620                           	line	86
+   621                           	
+   622  0694                     l5287:	
+   623                           ;Read_Create_MSG.c: 86: SPI_Write(0b00000010);
+   624  0694  3002               	movlw	(02h)
+   625  0695  120A  118A  24BB   	fcall	_SPI_Write
+              120A  118A         
+   626                           	line	87
+   627                           ;Read_Create_MSG.c: 87: SPI_Read();
+   628  069A  120A  118A  2501   	fcall	_SPI_Read
+              120A  118A         
+   629                           	line	88
+   630                           ;Read_Create_MSG.c: 88: Decode_SM();
+   631  069F  120A  118A  272C   	fcall	_Decode_SM
+              120A  118A         
+   632  06A4  2EA5               	goto	l5289
+   633                           	line	89
+   634                           	
+   635  06A5                     l2810:	
+   636                           	line	90
+   637                           	
+   638  06A5                     l5289:	
+   639                           ;Read_Create_MSG.c: 89: }
+   640                           ;Read_Create_MSG.c: 90: if (RB2 == 1)
+   641  06A5  1283               	bcf	status, 5	;RP0=0, select bank0
+   642  06A6  1303               	bcf	status, 6	;RP1=0, select bank0
+   643  06A7  1D06               	btfss	(50/8),(50)&7
+   644  06A8  2EAA               	goto	u3201
+   645  06A9  2EAB               	goto	u3200
+   646  06AA                     u3201:
+   647  06AA  2EBE               	goto	l5295
+   648  06AB                     u3200:
+   649                           	line	92
+   650                           	
+   651  06AB                     l5291:	
+   652                           ;Read_Create_MSG.c: 91: {
+   653                           ;Read_Create_MSG.c: 92: RB5 = 1;
+   654  06AB  1686               	bsf	(53/8),(53)&7
+   655                           	line	93
+   656                           ;Read_Create_MSG.c: 93: RD4 = 1;
+   657  06AC  1608               	bsf	(68/8),(68)&7
+   658                           	line	94
+   659                           	
+   660  06AD                     l5293:	
+   661                           ;Read_Create_MSG.c: 94: SPI_Write(0b00000011);
+   662  06AD  3003               	movlw	(03h)
+   663  06AE  120A  118A  24BB   	fcall	_SPI_Write
+              120A  118A         
+   664                           	line	95
+   665                           ;Read_Create_MSG.c: 95: SPI_Read();
+   666  06B3  120A  118A  2501   	fcall	_SPI_Read
+              120A  118A         
+   667                           	line	96
+   668                           ;Read_Create_MSG.c: 96: Decode_SM();
+   669  06B8  120A  118A  272C   	fcall	_Decode_SM
+              120A  118A         
+   670  06BD  2EBE               	goto	l5295
+   671                           	line	97
+   672                           	
+   673  06BE                     l2811:	
+   674                           	line	98
+   675                           	
+   676  06BE                     l5295:	
+   677                           ;Read_Create_MSG.c: 97: }
+   678                           ;Read_Create_MSG.c: 98: if (RB1 == 1)
+   679  06BE  1283               	bcf	status, 5	;RP0=0, select bank0
+   680  06BF  1303               	bcf	status, 6	;RP1=0, select bank0
+   681  06C0  1C86               	btfss	(49/8),(49)&7
+   682  06C1  2EC3               	goto	u3211
+   683  06C2  2EC4               	goto	u3210
+   684  06C3                     u3211:
+   685  06C3  2ED7               	goto	l5301
+   686  06C4                     u3210:
+   687                           	line	100
+   688                           	
+   689  06C4                     l5297:	
+   690                           ;Read_Create_MSG.c: 99: {
+   691                           ;Read_Create_MSG.c: 100: RB5 = 1;
+   692  06C4  1686               	bsf	(53/8),(53)&7
+   693                           	line	101
+   694                           ;Read_Create_MSG.c: 101: RC7 = 1;
+   695  06C5  1787               	bsf	(63/8),(63)&7
+   696                           	line	102
+   697                           	
+   698  06C6                     l5299:	
+   699                           ;Read_Create_MSG.c: 102: SPI_Write(0b00000100);
+   700  06C6  3004               	movlw	(04h)
+   701  06C7  120A  118A  24BB   	fcall	_SPI_Write
+              120A  118A         
+   702                           	line	103
+   703                           ;Read_Create_MSG.c: 103: SPI_Read();
+   704  06CC  120A  118A  2501   	fcall	_SPI_Read
+              120A  118A         
+   705                           	line	104
+   706                           ;Read_Create_MSG.c: 104: Decode_SM();
+   707  06D1  120A  118A  272C   	fcall	_Decode_SM
+              120A  118A         
+   708  06D6  2ED7               	goto	l5301
+   709                           	line	105
+   710                           	
+   711  06D7                     l2812:	
+   712                           	line	106
+   713                           	
+   714  06D7                     l5301:	
+   715                           ;Read_Create_MSG.c: 105: }
+   716                           ;Read_Create_MSG.c: 106: if (RB0 == 1)
+   717  06D7  1283               	bcf	status, 5	;RP0=0, select bank0
+   718  06D8  1303               	bcf	status, 6	;RP1=0, select bank0
+   719  06D9  1C06               	btfss	(48/8),(48)&7
+   720  06DA  2EDC               	goto	u3221
+   721  06DB  2EDD               	goto	u3220
+   722  06DC                     u3221:
+   723  06DC  2EEF               	goto	l2813
+   724  06DD                     u3220:
+   725                           	line	108
+   726                           	
+   727  06DD                     l5303:	
+   728                           ;Read_Create_MSG.c: 107: {
+   729                           ;Read_Create_MSG.c: 108: RB5 = 1;
+   730  06DD  1686               	bsf	(53/8),(53)&7
+   731                           	line	109
+   732                           ;Read_Create_MSG.c: 109: RC6 = 1;
+   733  06DE  1707               	bsf	(62/8),(62)&7
+   734                           	line	110
+   735                           	
+   736  06DF                     l5305:	
+   737                           ;Read_Create_MSG.c: 110: SPI_Write(0b00000101);
+   738  06DF  3005               	movlw	(05h)
+   739  06E0  120A  118A  24BB   	fcall	_SPI_Write
+              120A  118A         
+   740                           	line	111
+   741                           ;Read_Create_MSG.c: 111: SPI_Read();
+   742  06E5  120A  118A  2501   	fcall	_SPI_Read
+              120A  118A         
+   743                           	line	112
+   744                           ;Read_Create_MSG.c: 112: Decode_SM();
+   745  06EA  120A  118A  272C   	fcall	_Decode_SM
+              120A  118A         
+   746                           	line	113
+   747                           	
+   748  06EF                     l2813:	
+   749                           	line	114
+   750                           ;Read_Create_MSG.c: 113: }
+   751                           ;Read_Create_MSG.c: 114: Delay(DT);
+   752  06EF  1283               	bcf	status, 5	;RP0=0, select bank0
+   753  06F0  1303               	bcf	status, 6	;RP1=0, select bank0
+   754  06F1  0834               	movf	(Send_MS@DT+1),w
+   755  06F2  01A7               	clrf	(?___awtoft+1)
+   756  06F3  07A7               	addwf	(?___awtoft+1)
+   757  06F4  0833               	movf	(Send_MS@DT),w
+   758  06F5  01A6               	clrf	(?___awtoft)
+   759  06F6  07A6               	addwf	(?___awtoft)
+   760                           
+   761  06F7  120A  118A  2524   	fcall	___awtoft
+              120A  118A         
+   762  06FC  1283               	bcf	status, 5	;RP0=0, select bank0
+   763  06FD  1303               	bcf	status, 6	;RP1=0, select bank0
+   764  06FE  0826               	movf	(0+(?___awtoft)),w
+   765  06FF  00AC               	movwf	(?_Delay)
+   766  0700  0827               	movf	(1+(?___awtoft)),w
+   767  0701  00AD               	movwf	(?_Delay+1)
+   768  0702  0828               	movf	(2+(?___awtoft)),w
+   769  0703  00AE               	movwf	(?_Delay+2)
+   770  0704  120A  118A  2550   	fcall	_Delay
+              120A  118A         
+   771                           	line	115
+   772                           	
+   773  0709                     l5307:	
+   774                           ;Read_Create_MSG.c: 115: RB5 = 0;
+   775  0709  1283               	bcf	status, 5	;RP0=0, select bank0
+   776  070A  1303               	bcf	status, 6	;RP1=0, select bank0
+   777  070B  1286               	bcf	(53/8),(53)&7
+   778                           	line	116
+   779                           	
+   780  070C                     l5309:	
+   781                           ;Read_Create_MSG.c: 116: Clear_LEDs();
+   782  070C  120A  118A  24B1   	fcall	_Clear_LEDs
+              120A  118A         
+   783                           	line	117
+   784                           	
+   785  0711                     l5311:	
+   786                           ;Read_Create_MSG.c: 117: Delay(DT);
+   787  0711  1283               	bcf	status, 5	;RP0=0, select bank0
+   788  0712  1303               	bcf	status, 6	;RP1=0, select bank0
+   789  0713  0834               	movf	(Send_MS@DT+1),w
+   790  0714  01A7               	clrf	(?___awtoft+1)
+   791  0715  07A7               	addwf	(?___awtoft+1)
+   792  0716  0833               	movf	(Send_MS@DT),w
+   793  0717  01A6               	clrf	(?___awtoft)
+   794  0718  07A6               	addwf	(?___awtoft)
+   795                           
+   796  0719  120A  118A  2524   	fcall	___awtoft
+              120A  118A         
+   797  071E  1283               	bcf	status, 5	;RP0=0, select bank0
+   798  071F  1303               	bcf	status, 6	;RP1=0, select bank0
+   799  0720  0826               	movf	(0+(?___awtoft)),w
+   800  0721  00AC               	movwf	(?_Delay)
+   801  0722  0827               	movf	(1+(?___awtoft)),w
+   802  0723  00AD               	movwf	(?_Delay+1)
+   803  0724  0828               	movf	(2+(?___awtoft)),w
+   804  0725  00AE               	movwf	(?_Delay+2)
+   805  0726  120A  118A  2550   	fcall	_Delay
+              120A  118A         
+   806                           	line	118
+   807                           	
+   808  072B                     l2814:	
+   809  072B  0008               	return
+   810                           	opt stack 0
+   811                           GLOBAL	__end_of_Send_MS
+   812  072C                     	__end_of_Send_MS:
+   813 ;; =============== function _Send_MS ends ============
+   814                           
+   815                           	signat	_Send_MS,88
+   816                           	global	_Decode_SM
+   817                           psect	text296,local,class=CODE,delta=2
+   818                           global __ptext296
+   819  072C                     __ptext296:
+   820                           
+   821 ;; *************** function _Decode_SM *****************
+   822 ;; Defined at:
+   823 ;;		line 23 in file "C:\Users\Alex\Dropbox\UWE\UWE Final Year\co-design VHDL\Code\14b - Deo SPI PIC (Master)\Read_Create
+       _MSG.c"
+   824 ;; Parameters:    Size  Location     Type
+   825 ;;		None
+   826 ;; Auto vars:     Size  Location     Type
+   827 ;;  DT              2   17[BANK0 ] int 
+   828 ;; Return value:  Size  Location     Type
+   829 ;;		None               void
+   830 ;; Registers used:
+   831 ;;		wreg, status,2, status,0, pclath, cstack
+   832 ;; Tracked objects:
+   833 ;;		On entry : 0/0
+   834 ;;		On exit  : 0/0
+   835 ;;		Unchanged: 0/0
+   836 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   837 ;;      Params:         0       0       0       0       0
+   838 ;;      Locals:         0       2       0       0       0
+   839 ;;      Temps:          0       0       0       0       0
+   840 ;;      Totals:         0       2       0       0       0
+   841 ;;Total ram usage:        2 bytes
+   842 ;; Hardware stack levels used:    1
+   843 ;; Hardware stack levels required when called:    3
+   844 ;; This function calls:
+   845 ;;		___awtoft
+   846 ;;		_Delay
+   847 ;;		_Clear_LEDs
+   848 ;; This function is called by:
+   849 ;;		_Send_MS
+   850 ;; This function uses a non-reentrant model
+   851 ;;
+   852                           psect	text296
+   853                           	file	"C:\Users\Alex\Dropbox\UWE\UWE Final Year\co-design VHDL\Code\14b - Deo SPI PIC (M
+                                 aster)\Read_Create_MSG.c"
+   854                           	line	23
+   855                           	global	__size_of_Decode_SM
+   856  00D4                     	__size_of_Decode_SM	equ	__end_of_Decode_SM-_Decode_SM
+   857                           	
+   858  072C                     _Decode_SM:	
+   859                           	opt	stack 3
+   860                           ; Regs used in _Decode_SM: [wreg+status,2+status,0+pclath+cstack]
+   861                           	line	25
+   862                           	
+   863  072C                     l5239:	
+   864                           ;Read_Create_MSG.c: 25: int DT = 1000;
+   865  072C  30E8               	movlw	low(03E8h)
+   866  072D  1283               	bcf	status, 5	;RP0=0, select bank0
+   867  072E  1303               	bcf	status, 6	;RP1=0, select bank0
+   868  072F  00B1               	movwf	(Decode_SM@DT)
+   869  0730  3003               	movlw	high(03E8h)
+   870  0731  00B2               	movwf	((Decode_SM@DT))+1
+   871                           	line	27
+   872                           ;Read_Create_MSG.c: 27: if (SPI_Return == 0b10000000)
+   873  0732  3000               	movlw	0
+   874  0733  0638               	xorwf	(_SPI_Return+3),w
+   875  0734  1D03               	skipz
+   876  0735  2F40               	goto	u3115
+   877  0736  3000               	movlw	0
+   878  0737  0637               	xorwf	(_SPI_Return+2),w
+   879  0738  1D03               	skipz
+   880  0739  2F40               	goto	u3115
+   881  073A  3000               	movlw	0
+   882  073B  0636               	xorwf	(_SPI_Return+1),w
+   883  073C  1D03               	skipz
+   884  073D  2F40               	goto	u3115
+   885  073E  3080               	movlw	080h
+   886  073F  0635               	xorwf	(_SPI_Return),w
+   887  0740                     u3115:
+   888  0740  1D03               	skipz
+   889  0741  2F43               	goto	u3111
+   890  0742  2F44               	goto	u3110
+   891  0743                     u3111:
+   892  0743  2F47               	goto	l5243
+   893  0744                     u3110:
+   894                           	line	29
+   895                           	
+   896  0744                     l5241:	
+   897                           ;Read_Create_MSG.c: 28: {
+   898                           ;Read_Create_MSG.c: 29: RB5 = 1;
+   899  0744  1686               	bsf	(53/8),(53)&7
+   900                           	line	30
+   901                           ;Read_Create_MSG.c: 30: RD6 = 1;
+   902  0745  1708               	bsf	(70/8),(70)&7
+   903  0746  2F47               	goto	l5243
+   904                           	line	31
+   905                           	
+   906  0747                     l2799:	
+   907                           	line	32
+   908                           	
+   909  0747                     l5243:	
+   910                           ;Read_Create_MSG.c: 31: }
+   911                           ;Read_Create_MSG.c: 32: if (SPI_Return == 0b01000000)
+   912  0747  3000               	movlw	0
+   913  0748  0638               	xorwf	(_SPI_Return+3),w
+   914  0749  1D03               	skipz
+   915  074A  2F55               	goto	u3125
+   916  074B  3000               	movlw	0
+   917  074C  0637               	xorwf	(_SPI_Return+2),w
+   918  074D  1D03               	skipz
+   919  074E  2F55               	goto	u3125
+   920  074F  3000               	movlw	0
+   921  0750  0636               	xorwf	(_SPI_Return+1),w
+   922  0751  1D03               	skipz
+   923  0752  2F55               	goto	u3125
+   924  0753  3040               	movlw	040h
+   925  0754  0635               	xorwf	(_SPI_Return),w
+   926  0755                     u3125:
+   927  0755  1D03               	skipz
+   928  0756  2F58               	goto	u3121
+   929  0757  2F59               	goto	u3120
+   930  0758                     u3121:
+   931  0758  2F5C               	goto	l5247
+   932  0759                     u3120:
+   933                           	line	34
+   934                           	
+   935  0759                     l5245:	
+   936                           ;Read_Create_MSG.c: 33: {
+   937                           ;Read_Create_MSG.c: 34: RB5 = 1;
+   938  0759  1686               	bsf	(53/8),(53)&7
+   939                           	line	35
+   940                           ;Read_Create_MSG.c: 35: RD5 = 1;
+   941  075A  1688               	bsf	(69/8),(69)&7
+   942  075B  2F5C               	goto	l5247
+   943                           	line	36
+   944                           	
+   945  075C                     l2800:	
+   946                           	line	37
+   947                           	
+   948  075C                     l5247:	
+   949                           ;Read_Create_MSG.c: 36: }
+   950                           ;Read_Create_MSG.c: 37: if (SPI_Return == 0b11000000)
+   951  075C  3000               	movlw	0
+   952  075D  0638               	xorwf	(_SPI_Return+3),w
+   953  075E  1D03               	skipz
+   954  075F  2F6A               	goto	u3135
+   955  0760  3000               	movlw	0
+   956  0761  0637               	xorwf	(_SPI_Return+2),w
+   957  0762  1D03               	skipz
+   958  0763  2F6A               	goto	u3135
+   959  0764  3000               	movlw	0
+   960  0765  0636               	xorwf	(_SPI_Return+1),w
+   961  0766  1D03               	skipz
+   962  0767  2F6A               	goto	u3135
+   963  0768  30C0               	movlw	0C0h
+   964  0769  0635               	xorwf	(_SPI_Return),w
+   965  076A                     u3135:
+   966  076A  1D03               	skipz
+   967  076B  2F6D               	goto	u3131
+   968  076C  2F6E               	goto	u3130
+   969  076D                     u3131:
+   970  076D  2F71               	goto	l5251
+   971  076E                     u3130:
+   972                           	line	39
+   973                           	
+   974  076E                     l5249:	
+   975                           ;Read_Create_MSG.c: 38: {
+   976                           ;Read_Create_MSG.c: 39: RB5 = 1;
+   977  076E  1686               	bsf	(53/8),(53)&7
+   978                           	line	40
+   979                           ;Read_Create_MSG.c: 40: RD4 = 1;
+   980  076F  1608               	bsf	(68/8),(68)&7
+   981  0770  2F71               	goto	l5251
+   982                           	line	41
+   983                           	
+   984  0771                     l2801:	
+   985                           	line	42
+   986                           	
+   987  0771                     l5251:	
+   988                           ;Read_Create_MSG.c: 41: }
+   989                           ;Read_Create_MSG.c: 42: if (SPI_Return == 0b00100000)
+   990  0771  3000               	movlw	0
+   991  0772  0638               	xorwf	(_SPI_Return+3),w
+   992  0773  1D03               	skipz
+   993  0774  2F7F               	goto	u3145
+   994  0775  3000               	movlw	0
+   995  0776  0637               	xorwf	(_SPI_Return+2),w
+   996  0777  1D03               	skipz
+   997  0778  2F7F               	goto	u3145
+   998  0779  3000               	movlw	0
+   999  077A  0636               	xorwf	(_SPI_Return+1),w
+  1000  077B  1D03               	skipz
+  1001  077C  2F7F               	goto	u3145
+  1002  077D  3020               	movlw	020h
+  1003  077E  0635               	xorwf	(_SPI_Return),w
+  1004  077F                     u3145:
+  1005  077F  1D03               	skipz
+  1006  0780  2F82               	goto	u3141
+  1007  0781  2F83               	goto	u3140
+  1008  0782                     u3141:
+  1009  0782  2F86               	goto	l5255
+  1010  0783                     u3140:
+  1011                           	line	44
+  1012                           	
+  1013  0783                     l5253:	
+  1014                           ;Read_Create_MSG.c: 43: {
+  1015                           ;Read_Create_MSG.c: 44: RB5 = 1;
+  1016  0783  1686               	bsf	(53/8),(53)&7
+  1017                           	line	45
+  1018                           ;Read_Create_MSG.c: 45: RC7 = 1;
+  1019  0784  1787               	bsf	(63/8),(63)&7
+  1020  0785  2F86               	goto	l5255
+  1021                           	line	46
+  1022                           	
+  1023  0786                     l2802:	
+  1024                           	line	47
+  1025                           	
+  1026  0786                     l5255:	
+  1027                           ;Read_Create_MSG.c: 46: }
+  1028                           ;Read_Create_MSG.c: 47: if (SPI_Return == 0b10100000)
+  1029  0786  3000               	movlw	0
+  1030  0787  0638               	xorwf	(_SPI_Return+3),w
+  1031  0788  1D03               	skipz
+  1032  0789  2F94               	goto	u3155
+  1033  078A  3000               	movlw	0
+  1034  078B  0637               	xorwf	(_SPI_Return+2),w
+  1035  078C  1D03               	skipz
+  1036  078D  2F94               	goto	u3155
+  1037  078E  3000               	movlw	0
+  1038  078F  0636               	xorwf	(_SPI_Return+1),w
+  1039  0790  1D03               	skipz
+  1040  0791  2F94               	goto	u3155
+  1041  0792  30A0               	movlw	0A0h
+  1042  0793  0635               	xorwf	(_SPI_Return),w
+  1043  0794                     u3155:
+  1044  0794  1D03               	skipz
+  1045  0795  2F97               	goto	u3151
+  1046  0796  2F98               	goto	u3150
+  1047  0797                     u3151:
+  1048  0797  2F9B               	goto	l5259
+  1049  0798                     u3150:
+  1050                           	line	49
+  1051                           	
+  1052  0798                     l5257:	
+  1053                           ;Read_Create_MSG.c: 48: {
+  1054                           ;Read_Create_MSG.c: 49: RB5 = 1;
+  1055  0798  1686               	bsf	(53/8),(53)&7
+  1056                           	line	50
+  1057                           ;Read_Create_MSG.c: 50: RC6 = 1;
+  1058  0799  1707               	bsf	(62/8),(62)&7
+  1059  079A  2F9B               	goto	l5259
+  1060                           	line	51
+  1061                           	
+  1062  079B                     l2803:	
+  1063                           	line	52
+  1064                           	
+  1065  079B                     l5259:	
+  1066                           ;Read_Create_MSG.c: 51: }
+  1067                           ;Read_Create_MSG.c: 52: if (SPI_Return == 0b01100000)
+  1068  079B  3000               	movlw	0
+  1069  079C  0638               	xorwf	(_SPI_Return+3),w
+  1070  079D  1D03               	skipz
+  1071  079E  2FA9               	goto	u3165
+  1072  079F  3000               	movlw	0
+  1073  07A0  0637               	xorwf	(_SPI_Return+2),w
+  1074  07A1  1D03               	skipz
+  1075  07A2  2FA9               	goto	u3165
+  1076  07A3  3000               	movlw	0
+  1077  07A4  0636               	xorwf	(_SPI_Return+1),w
+  1078  07A5  1D03               	skipz
+  1079  07A6  2FA9               	goto	u3165
+  1080  07A7  3060               	movlw	060h
+  1081  07A8  0635               	xorwf	(_SPI_Return),w
+  1082  07A9                     u3165:
+  1083  07A9  1D03               	skipz
+  1084  07AA  2FAC               	goto	u3161
+  1085  07AB  2FAD               	goto	u3160
+  1086  07AC                     u3161:
+  1087  07AC  2FB0               	goto	l5263
+  1088  07AD                     u3160:
+  1089                           	line	54
+  1090                           	
+  1091  07AD                     l5261:	
+  1092                           ;Read_Create_MSG.c: 53: {
+  1093                           ;Read_Create_MSG.c: 54: RB5 = 1;
+  1094  07AD  1686               	bsf	(53/8),(53)&7
+  1095                           	line	55
+  1096                           ;Read_Create_MSG.c: 55: RD3 = 1;
+  1097  07AE  1588               	bsf	(67/8),(67)&7
+  1098  07AF  2FB0               	goto	l5263
+  1099                           	line	56
+  1100                           	
+  1101  07B0                     l2804:	
+  1102                           	line	57
+  1103                           	
+  1104  07B0                     l5263:	
+  1105                           ;Read_Create_MSG.c: 56: }
+  1106                           ;Read_Create_MSG.c: 57: if (SPI_Return == 0b11100000)
+  1107  07B0  3000               	movlw	0
+  1108  07B1  0638               	xorwf	(_SPI_Return+3),w
+  1109  07B2  1D03               	skipz
+  1110  07B3  2FBE               	goto	u3175
+  1111  07B4  3000               	movlw	0
+  1112  07B5  0637               	xorwf	(_SPI_Return+2),w
+  1113  07B6  1D03               	skipz
+  1114  07B7  2FBE               	goto	u3175
+  1115  07B8  3000               	movlw	0
+  1116  07B9  0636               	xorwf	(_SPI_Return+1),w
+  1117  07BA  1D03               	skipz
+  1118  07BB  2FBE               	goto	u3175
+  1119  07BC  30E0               	movlw	0E0h
+  1120  07BD  0635               	xorwf	(_SPI_Return),w
+  1121  07BE                     u3175:
+  1122  07BE  1D03               	skipz
+  1123  07BF  2FC1               	goto	u3171
+  1124  07C0  2FC2               	goto	u3170
+  1125  07C1                     u3171:
+  1126  07C1  2FC5               	goto	l5267
+  1127  07C2                     u3170:
+  1128                           	line	59
+  1129                           	
+  1130  07C2                     l5265:	
+  1131                           ;Read_Create_MSG.c: 58: {
+  1132                           ;Read_Create_MSG.c: 59: RB5 = 1;
+  1133  07C2  1686               	bsf	(53/8),(53)&7
+  1134                           	line	60
+  1135                           ;Read_Create_MSG.c: 60: RD2 = 1;
+  1136  07C3  1508               	bsf	(66/8),(66)&7
+  1137  07C4  2FC5               	goto	l5267
+  1138                           	line	61
+  1139                           	
+  1140  07C5                     l2805:	
+  1141                           	line	62
+  1142                           	
+  1143  07C5                     l5267:	
+  1144                           ;Read_Create_MSG.c: 61: }
+  1145                           ;Read_Create_MSG.c: 62: Delay(DT);
+  1146  07C5  0832               	movf	(Decode_SM@DT+1),w
+  1147  07C6  01A7               	clrf	(?___awtoft+1)
+  1148  07C7  07A7               	addwf	(?___awtoft+1)
+  1149  07C8  0831               	movf	(Decode_SM@DT),w
+  1150  07C9  01A6               	clrf	(?___awtoft)
+  1151  07CA  07A6               	addwf	(?___awtoft)
+  1152                           
+  1153  07CB  120A  118A  2524   	fcall	___awtoft
+              120A  118A         
+  1154  07D0  1283               	bcf	status, 5	;RP0=0, select bank0
+  1155  07D1  1303               	bcf	status, 6	;RP1=0, select bank0
+  1156  07D2  0826               	movf	(0+(?___awtoft)),w
+  1157  07D3  00AC               	movwf	(?_Delay)
+  1158  07D4  0827               	movf	(1+(?___awtoft)),w
+  1159  07D5  00AD               	movwf	(?_Delay+1)
+  1160  07D6  0828               	movf	(2+(?___awtoft)),w
+  1161  07D7  00AE               	movwf	(?_Delay+2)
+  1162  07D8  120A  118A  2550   	fcall	_Delay
+              120A  118A         
+  1163                           	line	63
+  1164                           	
+  1165  07DD                     l5269:	
+  1166                           ;Read_Create_MSG.c: 63: RB5 = 0;
+  1167  07DD  1283               	bcf	status, 5	;RP0=0, select bank0
+  1168  07DE  1303               	bcf	status, 6	;RP1=0, select bank0
+  1169  07DF  1286               	bcf	(53/8),(53)&7
+  1170                           	line	64
+  1171                           	
+  1172  07E0                     l5271:	
+  1173                           ;Read_Create_MSG.c: 64: Clear_LEDs();
+  1174  07E0  120A  118A  24B1   	fcall	_Clear_LEDs
+              120A  118A         
+  1175                           	line	65
+  1176                           	
+  1177  07E5                     l5273:	
+  1178                           ;Read_Create_MSG.c: 65: Delay(DT);
+  1179  07E5  1283               	bcf	status, 5	;RP0=0, select bank0
+  1180  07E6  1303               	bcf	status, 6	;RP1=0, select bank0
+  1181  07E7  0832               	movf	(Decode_SM@DT+1),w
+  1182  07E8  01A7               	clrf	(?___awtoft+1)
+  1183  07E9  07A7               	addwf	(?___awtoft+1)
+  1184  07EA  0831               	movf	(Decode_SM@DT),w
+  1185  07EB  01A6               	clrf	(?___awtoft)
+  1186  07EC  07A6               	addwf	(?___awtoft)
+  1187                           
+  1188  07ED  120A  118A  2524   	fcall	___awtoft
+              120A  118A         
+  1189  07F2  1283               	bcf	status, 5	;RP0=0, select bank0
+  1190  07F3  1303               	bcf	status, 6	;RP1=0, select bank0
+  1191  07F4  0826               	movf	(0+(?___awtoft)),w
+  1192  07F5  00AC               	movwf	(?_Delay)
+  1193  07F6  0827               	movf	(1+(?___awtoft)),w
+  1194  07F7  00AD               	movwf	(?_Delay+1)
+  1195  07F8  0828               	movf	(2+(?___awtoft)),w
+  1196  07F9  00AE               	movwf	(?_Delay+2)
+  1197  07FA  120A  118A  2550   	fcall	_Delay
+              120A  118A         
+  1198                           	line	66
+  1199                           	
+  1200  07FF                     l2806:	
+  1201  07FF  0008               	return
+  1202                           	opt stack 0
+  1203                           GLOBAL	__end_of_Decode_SM
+  1204  0800                     	__end_of_Decode_SM:
+  1205 ;; =============== function _Decode_SM ends ============
+  1206                           
+  1207                           	signat	_Decode_SM,88
+  1208                           	global	_Delay
+  1209                           psect	text297,local,class=CODE,delta=2
+  1210                           global __ptext297
+  1211  0550                     __ptext297:
+  1212                           
+  1213 ;; *************** function _Delay *****************
+  1214 ;; Defined at:
+  1215 ;;		line 54 in file "C:\Users\Alex\Dropbox\UWE\UWE Final Year\co-design VHDL\Code\14b - Deo SPI PIC (Master)\main.c"
+  1216 ;; Parameters:    Size  Location     Type
+  1217 ;;  delay_time      3   12[BANK0 ] int 
+  1218 ;; Auto vars:     Size  Location     Type
+  1219 ;;  a               2   15[BANK0 ] int 
+  1220 ;; Return value:  Size  Location     Type
+  1221 ;;		None               void
+  1222 ;; Registers used:
+  1223 ;;		wreg, status,2, status,0, pclath, cstack
+  1224 ;; Tracked objects:
+  1225 ;;		On entry : 0/0
+  1226 ;;		On exit  : 0/0
+  1227 ;;		Unchanged: 0/0
+  1228 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+  1229 ;;      Params:         0       3       0       0       0
+  1230 ;;      Locals:         0       2       0       0       0
+  1231 ;;      Temps:          0       0       0       0       0
+  1232 ;;      Totals:         0       5       0       0       0
+  1233 ;;Total ram usage:        5 bytes
+  1234 ;; Hardware stack levels used:    1
+  1235 ;; Hardware stack levels required when called:    2
+  1236 ;; This function calls:
+  1237 ;;		___awtoft
+  1238 ;;		___ftge
+  1239 ;; This function is called by:
+  1240 ;;		_Decode_SM
+  1241 ;;		_Send_MS
+  1242 ;; This function uses a non-reentrant model
+  1243 ;;
+  1244                           psect	text297
+  1245                           	file	"C:\Users\Alex\Dropbox\UWE\UWE Final Year\co-design VHDL\Code\14b - Deo SPI PIC (M
+                                 aster)\main.c"
+  1246                           	line	54
+  1247                           	global	__size_of_Delay
+  1248  0034                     	__size_of_Delay	equ	__end_of_Delay-_Delay
+  1249                           	
+  1250  0550                     _Delay:	
+  1251                           	opt	stack 4
+  1252                           ; Regs used in _Delay: [wreg+status,2+status,0+pclath+cstack]
+  1253                           	line	55
+  1254                           	
+  1255  0550                     l5233:	
+  1256                           ;main.c: 55: int a = 0;
+  1257  0550  1283               	bcf	status, 5	;RP0=0, select bank0
+  1258  0551  1303               	bcf	status, 6	;RP1=0, select bank0
+  1259  0552  01AF               	clrf	(Delay@a)
+  1260  0553  01B0               	clrf	(Delay@a+1)
+  1261                           	line	56
+  1262                           ;main.c: 56: for ( a = 0; a < delay_time; a ++ )
+  1263  0554  01AF               	clrf	(Delay@a)
+  1264  0555  01B0               	clrf	(Delay@a+1)
+  1265  0556  2D60               	goto	l5237
+  1266                           	line	57
+  1267                           	
+  1268  0557                     l701:	
+  1269                           	line	56
+  1270                           	
+  1271  0557                     l5235:	
+  1272                           ;main.c: 57: { }
+  1273  0557  3001               	movlw	low(01h)
+  1274  0558  1283               	bcf	status, 5	;RP0=0, select bank0
+  1275  0559  1303               	bcf	status, 6	;RP1=0, select bank0
+  1276  055A  07AF               	addwf	(Delay@a),f
+  1277  055B  1803               	skipnc
+  1278  055C  0AB0               	incf	(Delay@a+1),f
+  1279  055D  3000               	movlw	high(01h)
+  1280  055E  07B0               	addwf	(Delay@a+1),f
+  1281  055F  2D60               	goto	l5237
+  1282                           	
+  1283  0560                     l700:	
+  1284                           	
+  1285  0560                     l5237:	
+  1286  0560  0830               	movf	(Delay@a+1),w
+  1287  0561  01A7               	clrf	(?___awtoft+1)
+  1288  0562  07A7               	addwf	(?___awtoft+1)
+  1289  0563  082F               	movf	(Delay@a),w
+  1290  0564  01A6               	clrf	(?___awtoft)
+  1291  0565  07A6               	addwf	(?___awtoft)
+  1292                           
+  1293  0566  120A  118A  2524   	fcall	___awtoft
+              120A  118A         
+  1294  056B  1283               	bcf	status, 5	;RP0=0, select bank0
+  1295  056C  1303               	bcf	status, 6	;RP1=0, select bank0
+  1296  056D  0826               	movf	(0+(?___awtoft)),w
+  1297  056E  00F8               	movwf	(?___ftge)
+  1298  056F  0827               	movf	(1+(?___awtoft)),w
+  1299  0570  00F9               	movwf	(?___ftge+1)
+  1300  0571  0828               	movf	(2+(?___awtoft)),w
+  1301  0572  00FA               	movwf	(?___ftge+2)
+  1302  0573  082C               	movf	(Delay@delay_time),w
+  1303  0574  00FB               	movwf	0+(?___ftge)+03h
+  1304  0575  082D               	movf	(Delay@delay_time+1),w
+  1305  0576  00FC               	movwf	1+(?___ftge)+03h
+  1306  0577  082E               	movf	(Delay@delay_time+2),w
+  1307  0578  00FD               	movwf	2+(?___ftge)+03h
+  1308  0579  120A  118A  2584   	fcall	___ftge
+              120A  118A         
+  1309  057E  1C03               	btfss	status,0
+  1310  057F  2D81               	goto	u3101
+  1311  0580  2D82               	goto	u3100
+  1312  0581                     u3101:
+  1313  0581  2D57               	goto	l5235
+  1314  0582                     u3100:
+  1315  0582  2D83               	goto	l703
+  1316                           	
+  1317  0583                     l702:	
+  1318                           	line	58
+  1319                           	
+  1320  0583                     l703:	
+  1321  0583  0008               	return
+  1322                           	opt stack 0
+  1323                           GLOBAL	__end_of_Delay
+  1324  0584                     	__end_of_Delay:
+  1325 ;; =============== function _Delay ends ============
+  1326                           
+  1327                           	signat	_Delay,4216
+  1328                           	global	___awtoft
+  1329                           psect	text298,local,class=CODE,delta=2
+  1330                           global __ptext298
+  1331  0524                     __ptext298:
+  1332                           
+  1333 ;; *************** function ___awtoft *****************
+  1334 ;; Defined at:
+  1335 ;;		line 33 in file "C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\awtoft.c"
+  1336 ;; Parameters:    Size  Location     Type
+  1337 ;;  c               2    6[BANK0 ] int 
+  1338 ;; Auto vars:     Size  Location     Type
+  1339 ;;  sign            1   11[BANK0 ] unsigned char 
+  1340 ;; Return value:  Size  Location     Type
+  1341 ;;                  3    6[BANK0 ] float 
+  1342 ;; Registers used:
+  1343 ;;		wreg, status,2, status,0, pclath, cstack
+  1344 ;; Tracked objects:
+  1345 ;;		On entry : 0/0
+  1346 ;;		On exit  : 0/0
+  1347 ;;		Unchanged: 0/0
+  1348 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+  1349 ;;      Params:         0       3       0       0       0
+  1350 ;;      Locals:         0       1       0       0       0
+  1351 ;;      Temps:          0       2       0       0       0
+  1352 ;;      Totals:         0       6       0       0       0
+  1353 ;;Total ram usage:        6 bytes
+  1354 ;; Hardware stack levels used:    1
+  1355 ;; Hardware stack levels required when called:    1
+  1356 ;; This function calls:
+  1357 ;;		___ftpack
+  1358 ;; This function is called by:
+  1359 ;;		_Delay
+  1360 ;;		_Decode_SM
+  1361 ;;		_Send_MS
+  1362 ;; This function uses a non-reentrant model
+  1363 ;;
+  1364                           psect	text298
+  1365                           	file	"C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\awtoft.c"
+  1366                           	line	33
+  1367                           	global	__size_of___awtoft
+  1368  002C                     	__size_of___awtoft	equ	__end_of___awtoft-___awtoft
+  1369                           	
+  1370  0524                     ___awtoft:	
+  1371                           	opt	stack 4
+  1372                           ; Regs used in ___awtoft: [wreg+status,2+status,0+pclath+cstack]
+  1373                           	line	36
+  1374                           	
+  1375  0524                     l5225:	
+  1376  0524  1283               	bcf	status, 5	;RP0=0, select bank0
+  1377  0525  1303               	bcf	status, 6	;RP1=0, select bank0
+  1378  0526  01AB               	clrf	(___awtoft@sign)
+  1379                           	line	37
+  1380  0527  1FA7               	btfss	(___awtoft@c+1),7
+  1381  0528  2D2A               	goto	u3091
+  1382  0529  2D2B               	goto	u3090
+  1383  052A                     u3091:
+  1384  052A  2D34               	goto	l5229
+  1385  052B                     u3090:
+  1386                           	line	38
+  1387                           	
+  1388  052B                     l5227:	
+  1389  052B  09A6               	comf	(___awtoft@c),f
+  1390  052C  09A7               	comf	(___awtoft@c+1),f
+  1391  052D  0AA6               	incf	(___awtoft@c),f
+  1392  052E  1903               	skipnz
+  1393  052F  0AA7               	incf	(___awtoft@c+1),f
+  1394                           	line	39
+  1395  0530  01AB               	clrf	(___awtoft@sign)
+  1396  0531  1403               	bsf	status,0
+  1397  0532  0DAB               	rlf	(___awtoft@sign),f
+  1398  0533  2D34               	goto	l5229
+  1399                           	line	40
+  1400                           	
+  1401  0534                     l3633:	
+  1402                           	line	41
+  1403                           	
+  1404  0534                     l5229:	
+  1405  0534  0826               	movf	(___awtoft@c),w
+  1406  0535  00F0               	movwf	(?___ftpack)
+  1407  0536  0827               	movf	(___awtoft@c+1),w
+  1408  0537  00F1               	movwf	(?___ftpack+1)
+  1409  0538  01F2               	clrf	(?___ftpack+2)
+  1410  0539  308E               	movlw	(08Eh)
+  1411  053A  00A9               	movwf	(??___awtoft+0)+0
+  1412  053B  0829               	movf	(??___awtoft+0)+0,w
+  1413  053C  00F3               	movwf	0+(?___ftpack)+03h
+  1414  053D  082B               	movf	(___awtoft@sign),w
+  1415  053E  00AA               	movwf	(??___awtoft+1)+0
+  1416  053F  082A               	movf	(??___awtoft+1)+0,w
+  1417  0540  00F4               	movwf	0+(?___ftpack)+04h
+  1418  0541  120A  118A  25F4   	fcall	___ftpack
+              120A  118A         
+  1419  0546  0870               	movf	(0+(?___ftpack)),w
+  1420  0547  1283               	bcf	status, 5	;RP0=0, select bank0
+  1421  0548  1303               	bcf	status, 6	;RP1=0, select bank0
+  1422  0549  00A6               	movwf	(?___awtoft)
+  1423  054A  0871               	movf	(1+(?___ftpack)),w
+  1424  054B  00A7               	movwf	(?___awtoft+1)
+  1425  054C  0872               	movf	(2+(?___ftpack)),w
+  1426  054D  00A8               	movwf	(?___awtoft+2)
+  1427  054E  2D4F               	goto	l3634
+  1428                           	
+  1429  054F                     l5231:	
+  1430                           	line	42
+  1431                           	
+  1432  054F                     l3634:	
+  1433  054F  0008               	return
+  1434                           	opt stack 0
+  1435                           GLOBAL	__end_of___awtoft
+  1436  0550                     	__end_of___awtoft:
+  1437 ;; =============== function ___awtoft ends ============
+  1438                           
+  1439                           	signat	___awtoft,4219
+  1440                           	global	___ftge
+  1441                           psect	text299,local,class=CODE,delta=2
+  1442                           global __ptext299
+  1443  0584                     __ptext299:
+  1444                           
+  1445 ;; *************** function ___ftge *****************
+  1446 ;; Defined at:
+  1447 ;;		line 5 in file "C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\ftge.c"
+  1448 ;; Parameters:    Size  Location     Type
+  1449 ;;  ff1             3    8[COMMON] float 
+  1450 ;;  ff2             3   11[COMMON] float 
+  1451 ;; Auto vars:     Size  Location     Type
+  1452 ;;		None
+  1453 ;; Return value:  Size  Location     Type
+  1454 ;;		None               void
+  1455 ;; Registers used:
+  1456 ;;		wreg, status,2, status,0
+  1457 ;; Tracked objects:
+  1458 ;;		On entry : 0/0
+  1459 ;;		On exit  : 0/0
+  1460 ;;		Unchanged: 0/0
+  1461 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+  1462 ;;      Params:         6       0       0       0       0
+  1463 ;;      Locals:         0       0       0       0       0
+  1464 ;;      Temps:          0       6       0       0       0
+  1465 ;;      Totals:         6       6       0       0       0
+  1466 ;;Total ram usage:       12 bytes
+  1467 ;; Hardware stack levels used:    1
+  1468 ;; This function calls:
+  1469 ;;		Nothing
+  1470 ;; This function is called by:
+  1471 ;;		_Delay
+  1472 ;; This function uses a non-reentrant model
+  1473 ;;
+  1474                           psect	text299
+  1475                           	file	"C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\ftge.c"
+  1476                           	line	5
+  1477                           	global	__size_of___ftge
+  1478  0070                     	__size_of___ftge	equ	__end_of___ftge-___ftge
+  1479                           	
+  1480  0584                     ___ftge:	
+  1481                           	opt	stack 5
+  1482                           ; Regs used in ___ftge: [wreg+status,2+status,0]
+  1483                           	line	6
+  1484                           	
+  1485  0584                     l5159:	
+  1486  0584  1FFA               	btfss	(___ftge@ff1+2),(23)&7
+  1487  0585  2D87               	goto	u2981
+  1488  0586  2D88               	goto	u2980
+  1489  0587                     u2981:
+  1490  0587  2DB0               	goto	l5163
+  1491  0588                     u2980:
+  1492                           	line	7
+  1493                           	
+  1494  0588                     l5161:	
+  1495  0588  3000               	movlw	0
+  1496  0589  1283               	bcf	status, 5	;RP0=0, select bank0
+  1497  058A  1303               	bcf	status, 6	;RP1=0, select bank0
+  1498  058B  00A0               	movwf	((??___ftge+0)+0)
+  1499  058C  3000               	movlw	0
+  1500  058D  00A1               	movwf	((??___ftge+0)+0+1)
+  1501  058E  3080               	movlw	080h
+  1502  058F  00A2               	movwf	((??___ftge+0)+0+2)
+  1503  0590  0978               	comf	(___ftge@ff1),w
+  1504  0591  00A3               	movwf	(??___ftge+3)+0
+  1505  0592  0979               	comf	(___ftge@ff1+1),w
+  1506  0593  00A4               	movwf	((??___ftge+3)+0+1)
+  1507  0594  097A               	comf	(___ftge@ff1+2),w
+  1508  0595  00A5               	movwf	((??___ftge+3)+0+2)
+  1509  0596  0AA3               	incf	(??___ftge+3)+0,f
+  1510  0597  1903               	skipnz
+  1511  0598  0AA4               	incf	((??___ftge+3)+0+1),f
+  1512  0599  1903               	skipnz
+  1513  059A  0AA5               	incf	((??___ftge+3)+0+2),f
+  1514  059B  0823               	movf	0+(??___ftge+3)+0,w
+  1515  059C  07A0               	addwf	(??___ftge+0)+0,f
+  1516  059D  0824               	movf	1+(??___ftge+3)+0,w
+  1517  059E  1803               	skipnc
+  1518  059F  0F24               	incfsz	1+(??___ftge+3)+0,w
+  1519  05A0  2DA2               	goto	u2991
+  1520  05A1  2DA3               	goto	u2992
+  1521  05A2                     u2991:
+  1522  05A2  07A1               	addwf	(??___ftge+0)+1,f
+  1523                           	
+  1524  05A3                     u2992:
+  1525  05A3  0825               	movf	2+(??___ftge+3)+0,w
+  1526  05A4  1803               	skipnc
+  1527  05A5  0F25               	incfsz	2+(??___ftge+3)+0,w
+  1528  05A6  2DA8               	goto	u2993
+  1529  05A7  2DA9               	goto	u2994
+  1530  05A8                     u2993:
+  1531  05A8  07A2               	addwf	(??___ftge+0)+2,f
+  1532                           	
+  1533  05A9                     u2994:
+  1534  05A9  0820               	movf	0+(??___ftge+0)+0,w
+  1535  05AA  00F8               	movwf	(___ftge@ff1)
+  1536  05AB  0821               	movf	1+(??___ftge+0)+0,w
+  1537  05AC  00F9               	movwf	(___ftge@ff1+1)
+  1538  05AD  0822               	movf	2+(??___ftge+0)+0,w
+  1539  05AE  00FA               	movwf	(___ftge@ff1+2)
+  1540  05AF  2DB0               	goto	l5163
+  1541                           	
+  1542  05B0                     l3664:	
+  1543                           	line	8
+  1544                           	
+  1545  05B0                     l5163:	
+  1546  05B0  1FFD               	btfss	(___ftge@ff2+2),(23)&7
+  1547  05B1  2DB3               	goto	u3001
+  1548  05B2  2DB4               	goto	u3000
+  1549  05B3                     u3001:
+  1550  05B3  2DDC               	goto	l5167
+  1551  05B4                     u3000:
+  1552                           	line	9
+  1553                           	
+  1554  05B4                     l5165:	
+  1555  05B4  3000               	movlw	0
+  1556  05B5  1283               	bcf	status, 5	;RP0=0, select bank0
+  1557  05B6  1303               	bcf	status, 6	;RP1=0, select bank0
+  1558  05B7  00A0               	movwf	((??___ftge+0)+0)
+  1559  05B8  3000               	movlw	0
+  1560  05B9  00A1               	movwf	((??___ftge+0)+0+1)
+  1561  05BA  3080               	movlw	080h
+  1562  05BB  00A2               	movwf	((??___ftge+0)+0+2)
+  1563  05BC  097B               	comf	(___ftge@ff2),w
+  1564  05BD  00A3               	movwf	(??___ftge+3)+0
+  1565  05BE  097C               	comf	(___ftge@ff2+1),w
+  1566  05BF  00A4               	movwf	((??___ftge+3)+0+1)
+  1567  05C0  097D               	comf	(___ftge@ff2+2),w
+  1568  05C1  00A5               	movwf	((??___ftge+3)+0+2)
+  1569  05C2  0AA3               	incf	(??___ftge+3)+0,f
+  1570  05C3  1903               	skipnz
+  1571  05C4  0AA4               	incf	((??___ftge+3)+0+1),f
+  1572  05C5  1903               	skipnz
+  1573  05C6  0AA5               	incf	((??___ftge+3)+0+2),f
+  1574  05C7  0823               	movf	0+(??___ftge+3)+0,w
+  1575  05C8  07A0               	addwf	(??___ftge+0)+0,f
+  1576  05C9  0824               	movf	1+(??___ftge+3)+0,w
+  1577  05CA  1803               	skipnc
+  1578  05CB  0F24               	incfsz	1+(??___ftge+3)+0,w
+  1579  05CC  2DCE               	goto	u3011
+  1580  05CD  2DCF               	goto	u3012
+  1581  05CE                     u3011:
+  1582  05CE  07A1               	addwf	(??___ftge+0)+1,f
+  1583                           	
+  1584  05CF                     u3012:
+  1585  05CF  0825               	movf	2+(??___ftge+3)+0,w
+  1586  05D0  1803               	skipnc
+  1587  05D1  0F25               	incfsz	2+(??___ftge+3)+0,w
+  1588  05D2  2DD4               	goto	u3013
+  1589  05D3  2DD5               	goto	u3014
+  1590  05D4                     u3013:
+  1591  05D4  07A2               	addwf	(??___ftge+0)+2,f
+  1592                           	
+  1593  05D5                     u3014:
+  1594  05D5  0820               	movf	0+(??___ftge+0)+0,w
+  1595  05D6  00FB               	movwf	(___ftge@ff2)
+  1596  05D7  0821               	movf	1+(??___ftge+0)+0,w
+  1597  05D8  00FC               	movwf	(___ftge@ff2+1)
+  1598  05D9  0822               	movf	2+(??___ftge+0)+0,w
+  1599  05DA  00FD               	movwf	(___ftge@ff2+2)
+  1600  05DB  2DDC               	goto	l5167
+  1601                           	
+  1602  05DC                     l3665:	
+  1603                           	line	10
+  1604                           	
+  1605  05DC                     l5167:	
+  1606  05DC  3080               	movlw	080h
+  1607  05DD  06FA               	xorwf	(___ftge@ff1+2),f
+  1608                           	line	11
+  1609                           	
+  1610  05DE                     l5169:	
+  1611  05DE  3080               	movlw	080h
+  1612  05DF  06FD               	xorwf	(___ftge@ff2+2),f
+  1613                           	line	12
+  1614                           	
+  1615  05E0                     l5171:	
+  1616  05E0  087D               	movf	(___ftge@ff2+2),w
+  1617  05E1  027A               	subwf	(___ftge@ff1+2),w
+  1618  05E2  1D03               	skipz
+  1619  05E3  2DEA               	goto	u3025
+  1620  05E4  087C               	movf	(___ftge@ff2+1),w
+  1621  05E5  0279               	subwf	(___ftge@ff1+1),w
+  1622  05E6  1D03               	skipz
+  1623  05E7  2DEA               	goto	u3025
+  1624  05E8  087B               	movf	(___ftge@ff2),w
+  1625  05E9  0278               	subwf	(___ftge@ff1),w
+  1626  05EA                     u3025:
+  1627  05EA  1803               	skipnc
+  1628  05EB  2DED               	goto	u3021
+  1629  05EC  2DEE               	goto	u3020
+  1630  05ED                     u3021:
+  1631  05ED  2DF0               	goto	l5175
+  1632  05EE                     u3020:
+  1633                           	
+  1634  05EE                     l5173:	
+  1635  05EE  1003               	clrc
+  1636                           	
+  1637  05EF  2DF3               	goto	l3666
+  1638                           	
+  1639  05F0                     l4943:	
+  1640                           	
+  1641  05F0                     l5175:	
+  1642  05F0  1403               	setc
+  1643                           	
+  1644  05F1  2DF3               	goto	l3666
+  1645                           	
+  1646  05F2                     l4945:	
+  1647  05F2  2DF3               	goto	l3666
+  1648                           	
+  1649  05F3                     l5177:	
+  1650                           	line	13
+  1651                           	
+  1652  05F3                     l3666:	
+  1653  05F3  0008               	return
+  1654                           	opt stack 0
+  1655                           GLOBAL	__end_of___ftge
+  1656  05F4                     	__end_of___ftge:
+  1657 ;; =============== function ___ftge ends ============
+  1658                           
+  1659                           	signat	___ftge,8312
+  1660                           	global	___ftpack
+  1661                           psect	text300,local,class=CODE,delta=2
+  1662                           global __ptext300
+  1663  05F4                     __ptext300:
+  1664                           
+  1665 ;; *************** function ___ftpack *****************
+  1666 ;; Defined at:
+  1667 ;;		line 63 in file "C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\float.c"
+  1668 ;; Parameters:    Size  Location     Type
+  1669 ;;  arg             3    0[COMMON] unsigned um
+  1670 ;;  exp             1    3[COMMON] unsigned char 
+  1671 ;;  sign            1    4[COMMON] unsigned char 
+  1672 ;; Auto vars:     Size  Location     Type
+  1673 ;;		None
+  1674 ;; Return value:  Size  Location     Type
+  1675 ;;                  3    0[COMMON] float 
+  1676 ;; Registers used:
+  1677 ;;		wreg, status,2, status,0
+  1678 ;; Tracked objects:
+  1679 ;;		On entry : 0/0
+  1680 ;;		On exit  : 0/0
+  1681 ;;		Unchanged: 0/0
+  1682 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+  1683 ;;      Params:         5       0       0       0       0
+  1684 ;;      Locals:         0       0       0       0       0
+  1685 ;;      Temps:          3       0       0       0       0
+  1686 ;;      Totals:         8       0       0       0       0
+  1687 ;;Total ram usage:        8 bytes
+  1688 ;; Hardware stack levels used:    1
+  1689 ;; This function calls:
+  1690 ;;		Nothing
+  1691 ;; This function is called by:
+  1692 ;;		___awtoft
+  1693 ;;		___ftadd
+  1694 ;;		___ftdiv
+  1695 ;;		___ftmul
+  1696 ;;		___lbtoft
+  1697 ;;		___abtoft
+  1698 ;;		___lwtoft
+  1699 ;;		___altoft
+  1700 ;;		___lltoft
+  1701 ;;		___attoft
+  1702 ;;		___lttoft
+  1703 ;; This function uses a non-reentrant model
+  1704 ;;
+  1705                           psect	text300
+  1706                           	file	"C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\float.c"
+  1707                           	line	63
+  1708                           	global	__size_of___ftpack
+  1709  007B                     	__size_of___ftpack	equ	__end_of___ftpack-___ftpack
+  1710                           	
+  1711  05F4                     ___ftpack:	
+  1712                           	opt	stack 4
+  1713                           ; Regs used in ___ftpack: [wreg+status,2+status,0]
+  1714                           	line	64
+  1715                           	
+  1716  05F4                     l5027:	
+  1717  05F4  0873               	movf	(___ftpack@exp),w
+  1718  05F5  1D03               	skipz
+  1719  05F6  2DF8               	goto	u2640
+  1720  05F7  2E00               	goto	l5031
+  1721  05F8                     u2640:
+  1722                           	
+  1723  05F8                     l5029:	
+  1724  05F8  0872               	movf	(___ftpack@arg+2),w
+  1725  05F9  0471               	iorwf	(___ftpack@arg+1),w
+  1726  05FA  0470               	iorwf	(___ftpack@arg),w
+  1727  05FB  1D03               	skipz
+  1728  05FC  2DFE               	goto	u2651
+  1729  05FD  2DFF               	goto	u2650
+  1730  05FE                     u2651:
+  1731  05FE  2E16               	goto	l5037
+  1732  05FF                     u2650:
+  1733  05FF  2E00               	goto	l5031
+  1734                           	
+  1735  0600                     l3831:	
+  1736                           	line	65
+  1737                           	
+  1738  0600                     l5031:	
+  1739  0600  3000               	movlw	0x0
+  1740  0601  00F0               	movwf	(?___ftpack)
+  1741  0602  3000               	movlw	0x0
+  1742  0603  00F1               	movwf	(?___ftpack+1)
+  1743  0604  3000               	movlw	0x0
+  1744  0605  00F2               	movwf	(?___ftpack+2)
+  1745  0606  2E6E               	goto	l3832
+  1746                           	
+  1747  0607                     l5033:	
+  1748  0607  2E6E               	goto	l3832
+  1749                           	
+  1750  0608                     l3829:	
+  1751                           	line	66
+  1752  0608  2E16               	goto	l5037
+  1753                           	
+  1754  0609                     l3834:	
+  1755                           	line	67
+  1756                           	
+  1757  0609                     l5035:	
+  1758  0609  3001               	movlw	(01h)
+  1759  060A  00F5               	movwf	(??___ftpack+0)+0
+  1760  060B  0875               	movf	(??___ftpack+0)+0,w
+  1761  060C  07F3               	addwf	(___ftpack@exp),f
+  1762                           	line	68
+  1763  060D  3001               	movlw	01h
+  1764  060E                     u2665:
+  1765  060E  1003               	clrc
+  1766  060F  0CF2               	rrf	(___ftpack@arg+2),f
+  1767  0610  0CF1               	rrf	(___ftpack@arg+1),f
+  1768  0611  0CF0               	rrf	(___ftpack@arg),f
+  1769  0612  3EFF               	addlw	-1
+  1770  0613  1D03               	skipz
+  1771  0614  2E0E               	goto	u2665
+  1772                           
+  1773  0615  2E16               	goto	l5037
+  1774                           	line	69
+  1775                           	
+  1776  0616                     l3833:	
+  1777                           	line	66
+  1778                           	
+  1779  0616                     l5037:	
+  1780  0616  30FE               	movlw	low highword(0FE0000h)
+  1781  0617  0572               	andwf	(___ftpack@arg+2),w
+  1782  0618  1D03               	btfss	status,2
+  1783  0619  2E1B               	goto	u2671
+  1784  061A  2E1C               	goto	u2670
+  1785  061B                     u2671:
+  1786  061B  2E09               	goto	l5035
+  1787  061C                     u2670:
+  1788  061C  2E34               	goto	l3836
+  1789                           	
+  1790  061D                     l3835:	
+  1791                           	line	70
+  1792  061D  2E34               	goto	l3836
+  1793                           	
+  1794  061E                     l3837:	
+  1795                           	line	71
+  1796                           	
+  1797  061E                     l5039:	
+  1798  061E  3001               	movlw	(01h)
+  1799  061F  00F5               	movwf	(??___ftpack+0)+0
+  1800  0620  0875               	movf	(??___ftpack+0)+0,w
+  1801  0621  07F3               	addwf	(___ftpack@exp),f
+  1802                           	line	72
+  1803                           	
+  1804  0622                     l5041:	
+  1805  0622  3001               	movlw	01h
+  1806  0623  07F0               	addwf	(___ftpack@arg),f
+  1807  0624  3000               	movlw	0
+  1808  0625  1803               	skipnc
+  1809  0626  3001               movlw 1
+  1810  0627  07F1               	addwf	(___ftpack@arg+1),f
+  1811  0628  3000               	movlw	0
+  1812  0629  1803               	skipnc
+  1813  062A  3001               movlw 1
+  1814  062B  07F2               	addwf	(___ftpack@arg+2),f
+  1815                           	line	73
+  1816                           	
+  1817  062C                     l5043:	
+  1818  062C  3001               	movlw	01h
+  1819  062D                     u2685:
+  1820  062D  1003               	clrc
+  1821  062E  0CF2               	rrf	(___ftpack@arg+2),f
+  1822  062F  0CF1               	rrf	(___ftpack@arg+1),f
+  1823  0630  0CF0               	rrf	(___ftpack@arg),f
+  1824  0631  3EFF               	addlw	-1
+  1825  0632  1D03               	skipz
+  1826  0633  2E2D               	goto	u2685
+  1827                           
+  1828                           	line	74
+  1829                           	
+  1830  0634                     l3836:	
+  1831                           	line	70
+  1832  0634  30FF               	movlw	low highword(0FF0000h)
+  1833  0635  0572               	andwf	(___ftpack@arg+2),w
+  1834  0636  1D03               	btfss	status,2
+  1835  0637  2E39               	goto	u2691
+  1836  0638  2E3A               	goto	u2690
+  1837  0639                     u2691:
+  1838  0639  2E1E               	goto	l5039
+  1839  063A                     u2690:
+  1840  063A  2E47               	goto	l5047
+  1841                           	
+  1842  063B                     l3838:	
+  1843                           	line	75
+  1844  063B  2E47               	goto	l5047
+  1845                           	
+  1846  063C                     l3840:	
+  1847                           	line	76
+  1848                           	
+  1849  063C                     l5045:	
+  1850  063C  3001               	movlw	low(01h)
+  1851  063D  02F3               	subwf	(___ftpack@exp),f
+  1852                           	line	77
+  1853  063E  3001               	movlw	01h
+  1854  063F                     u2705:
+  1855  063F  1003               	clrc
+  1856  0640  0DF0               	rlf	(___ftpack@arg),f
+  1857  0641  0DF1               	rlf	(___ftpack@arg+1),f
+  1858  0642  0DF2               	rlf	(___ftpack@arg+2),f
+  1859  0643  3EFF               	addlw	-1
+  1860  0644  1D03               	skipz
+  1861  0645  2E3F               	goto	u2705
+  1862  0646  2E47               	goto	l5047
+  1863                           	line	78
+  1864                           	
+  1865  0647                     l3839:	
+  1866                           	line	75
+  1867                           	
+  1868  0647                     l5047:	
+  1869  0647  1FF1               	btfss	(___ftpack@arg+1),(15)&7
+  1870  0648  2E4A               	goto	u2711
+  1871  0649  2E4B               	goto	u2710
+  1872  064A                     u2711:
+  1873  064A  2E3C               	goto	l5045
+  1874  064B                     u2710:
+  1875                           	
+  1876  064B                     l3841:	
+  1877                           	line	79
+  1878  064B  1873               	btfsc	(___ftpack@exp),(0)&7
+  1879  064C  2E4E               	goto	u2721
+  1880  064D  2E4F               	goto	u2720
+  1881  064E                     u2721:
+  1882  064E  2E55               	goto	l3842
+  1883  064F                     u2720:
+  1884                           	line	80
+  1885                           	
+  1886  064F                     l5049:	
+  1887  064F  30FF               	movlw	0FFh
+  1888  0650  05F0               	andwf	(___ftpack@arg),f
+  1889  0651  307F               	movlw	07Fh
+  1890  0652  05F1               	andwf	(___ftpack@arg+1),f
+  1891  0653  30FF               	movlw	0FFh
+  1892  0654  05F2               	andwf	(___ftpack@arg+2),f
+  1893                           	
+  1894  0655                     l3842:	
+  1895                           	line	81
+  1896  0655  1003               	clrc
+  1897  0656  0CF3               	rrf	(___ftpack@exp),f
+  1898                           
+  1899                           	line	82
+  1900                           	
+  1901  0657                     l5051:	
+  1902  0657  0873               	movf	(___ftpack@exp),w
+  1903  0658  00F5               	movwf	((??___ftpack+0)+0)
+  1904  0659  01F6               	clrf	((??___ftpack+0)+0+1)
+  1905  065A  01F7               	clrf	((??___ftpack+0)+0+2)
+  1906  065B  3010               	movlw	010h
+  1907  065C                     u2735:
+  1908  065C  1003               	clrc
+  1909  065D  0DF5               	rlf	(??___ftpack+0)+0,f
+  1910  065E  0DF6               	rlf	(??___ftpack+0)+1,f
+  1911  065F  0DF7               	rlf	(??___ftpack+0)+2,f
+  1912  0660                     u2730:
+  1913  0660  3EFF               	addlw	-1
+  1914  0661  1D03               	skipz
+  1915  0662  2E5C               	goto	u2735
+  1916  0663  0875               	movf	0+(??___ftpack+0)+0,w
+  1917  0664  04F0               	iorwf	(___ftpack@arg),f
+  1918  0665  0876               	movf	1+(??___ftpack+0)+0,w
+  1919  0666  04F1               	iorwf	(___ftpack@arg+1),f
+  1920  0667  0877               	movf	2+(??___ftpack+0)+0,w
+  1921  0668  04F2               	iorwf	(___ftpack@arg+2),f
+  1922                           	line	83
+  1923                           	
+  1924  0669                     l5053:	
+  1925  0669  0874               	movf	(___ftpack@sign),w
+  1926  066A  1D03               	skipz
+  1927  066B  2E6D               	goto	u2740
+  1928  066C  2E6E               	goto	l3843
+  1929  066D                     u2740:
+  1930                           	line	84
+  1931                           	
+  1932  066D                     l5055:	
+  1933  066D  17F2               	bsf	(___ftpack@arg)+(23/8),(23)&7
+  1934                           	
+  1935  066E                     l3843:	
+  1936                           	line	85
+  1937                           	line	86
+  1938                           	
+  1939  066E                     l3832:	
+  1940  066E  0008               	return
+  1941                           	opt stack 0
+  1942                           GLOBAL	__end_of___ftpack
+  1943  066F                     	__end_of___ftpack:
+  1944 ;; =============== function ___ftpack ends ============
+  1945                           
+  1946                           	signat	___ftpack,12411
+  1947                           	global	_SPI_Read
+  1948                           psect	text301,local,class=CODE,delta=2
+  1949                           global __ptext301
+  1950  0501                     __ptext301:
+  1951                           
+  1952 ;; *************** function _SPI_Read *****************
+  1953 ;; Defined at:
+  1954 ;;		line 18 in file "C:\Users\Alex\Dropbox\UWE\UWE Final Year\co-design VHDL\Code\14b - Deo SPI PIC (Master)\SPI.c"
+  1955 ;; Parameters:    Size  Location     Type
+  1956 ;;		None
+  1957 ;; Auto vars:     Size  Location     Type
+  1958 ;;		None
+  1959 ;; Return value:  Size  Location     Type
+  1960 ;;		None               void
+  1961 ;; Registers used:
+  1962 ;;		wreg, status,2
+  1963 ;; Tracked objects:
+  1964 ;;		On entry : 0/0
+  1965 ;;		On exit  : 0/0
+  1966 ;;		Unchanged: 0/0
+  1967 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+  1968 ;;      Params:         0       0       0       0       0
+  1969 ;;      Locals:         0       0       0       0       0
+  1970 ;;      Temps:          4       0       0       0       0
+  1971 ;;      Totals:         4       0       0       0       0
+  1972 ;;Total ram usage:        4 bytes
+  1973 ;; Hardware stack levels used:    1
+  1974 ;; This function calls:
+  1975 ;;		Nothing
+  1976 ;; This function is called by:
+  1977 ;;		_Send_MS
+  1978 ;; This function uses a non-reentrant model
+  1979 ;;
+  1980                           psect	text301
+  1981                           	file	"C:\Users\Alex\Dropbox\UWE\UWE Final Year\co-design VHDL\Code\14b - Deo SPI PIC (M
+                                 aster)\SPI.c"
+  1982                           	line	18
+  1983                           	global	__size_of_SPI_Read
+  1984  0023                     	__size_of_SPI_Read	equ	__end_of_SPI_Read-_SPI_Read
+  1985                           	
+  1986  0501                     _SPI_Read:	
+  1987                           	opt	stack 6
+  1988                           ; Regs used in _SPI_Read: [wreg+status,2]
+  1989                           	line	19
+  1990                           	
+  1991  0501                     l4951:	
+  1992                           ;SPI.c: 19: SPI_Return = 0;
+  1993  0501  3000               	movlw	0
+  1994  0502  1283               	bcf	status, 5	;RP0=0, select bank0
+  1995  0503  1303               	bcf	status, 6	;RP1=0, select bank0
+  1996  0504  00B8               	movwf	(_SPI_Return+3)
+  1997  0505  3000               	movlw	0
+  1998  0506  00B7               	movwf	(_SPI_Return+2)
+  1999  0507  3000               	movlw	0
+  2000  0508  00B6               	movwf	(_SPI_Return+1)
+  2001  0509  3000               	movlw	0
+  2002  050A  00B5               	movwf	(_SPI_Return)
+  2003                           
+  2004                           	line	20
+  2005                           	
+  2006  050B                     l4953:	
+  2007                           ;SPI.c: 20: SSPBUF = 0b00000000;
+  2008  050B  0193               	clrf	(19)	;volatile
+  2009                           	line	21
+  2010                           ;SPI.c: 21: while(!SSPSTATbits.BF);
+  2011  050C  2D0D               	goto	l1406
+  2012                           	
+  2013  050D                     l1407:	
+  2014                           	
+  2015  050D                     l1406:	
+  2016  050D  1683               	bsf	status, 5	;RP0=1, select bank1
+  2017  050E  1303               	bcf	status, 6	;RP1=0, select bank1
+  2018  050F  1C14               	btfss	(148)^080h,0	;volatile
+  2019  0510  2D12               	goto	u2391
+  2020  0511  2D13               	goto	u2390
+  2021  0512                     u2391:
+  2022  0512  2D0D               	goto	l1406
+  2023  0513                     u2390:
+  2024  0513  2D14               	goto	l4955
+  2025                           	
+  2026  0514                     l1408:	
+  2027                           	line	22
+  2028                           	
+  2029  0514                     l4955:	
+  2030                           ;SPI.c: 22: SPI_Return = SSPBUF;
+  2031  0514  1283               	bcf	status, 5	;RP0=0, select bank0
+  2032  0515  1303               	bcf	status, 6	;RP1=0, select bank0
+  2033  0516  0813               	movf	(19),w	;volatile
+  2034  0517  00F0               	movwf	(??_SPI_Read+0)+0
+  2035  0518  01F1               	clrf	((??_SPI_Read+0)+0+1)
+  2036  0519  01F2               	clrf	((??_SPI_Read+0)+0+2)
+  2037  051A  01F3               	clrf	((??_SPI_Read+0)+0+3)
+  2038  051B  0873               	movf	3+(??_SPI_Read+0)+0,w
+  2039  051C  00B8               	movwf	(_SPI_Return+3)
+  2040  051D  0872               	movf	2+(??_SPI_Read+0)+0,w
+  2041  051E  00B7               	movwf	(_SPI_Return+2)
+  2042  051F  0871               	movf	1+(??_SPI_Read+0)+0,w
+  2043  0520  00B6               	movwf	(_SPI_Return+1)
+  2044  0521  0870               	movf	0+(??_SPI_Read+0)+0,w
+  2045  0522  00B5               	movwf	(_SPI_Return)
+  2046                           
+  2047                           	line	23
+  2048                           	
+  2049  0523                     l1409:	
+  2050  0523  0008               	return
+  2051                           	opt stack 0
+  2052                           GLOBAL	__end_of_SPI_Read
+  2053  0524                     	__end_of_SPI_Read:
+  2054 ;; =============== function _SPI_Read ends ============
+  2055                           
+  2056                           	signat	_SPI_Read,88
+  2057                           	global	_SPI_Write
+  2058                           psect	text302,local,class=CODE,delta=2
+  2059                           global __ptext302
+  2060  04BB                     __ptext302:
+  2061                           
+  2062 ;; *************** function _SPI_Write *****************
+  2063 ;; Defined at:
+  2064 ;;		line 10 in file "C:\Users\Alex\Dropbox\UWE\UWE Final Year\co-design VHDL\Code\14b - Deo SPI PIC (Master)\SPI.c"
+  2065 ;; Parameters:    Size  Location     Type
+  2066 ;;  data_1          1    wreg     unsigned char 
+  2067 ;; Auto vars:     Size  Location     Type
+  2068 ;;  data_1          1    0[COMMON] unsigned char 
+  2069 ;; Return value:  Size  Location     Type
+  2070 ;;		None               void
+  2071 ;; Registers used:
+  2072 ;;		wreg
+  2073 ;; Tracked objects:
+  2074 ;;		On entry : 0/0
+  2075 ;;		On exit  : 0/0
+  2076 ;;		Unchanged: 0/0
+  2077 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+  2078 ;;      Params:         0       0       0       0       0
+  2079 ;;      Locals:         1       0       0       0       0
+  2080 ;;      Temps:          0       0       0       0       0
+  2081 ;;      Totals:         1       0       0       0       0
+  2082 ;;Total ram usage:        1 bytes
+  2083 ;; Hardware stack levels used:    1
+  2084 ;; This function calls:
+  2085 ;;		Nothing
+  2086 ;; This function is called by:
+  2087 ;;		_Send_MS
+  2088 ;; This function uses a non-reentrant model
+  2089 ;;
+  2090                           psect	text302
+  2091                           	file	"C:\Users\Alex\Dropbox\UWE\UWE Final Year\co-design VHDL\Code\14b - Deo SPI PIC (M
+                                 aster)\SPI.c"
+  2092                           	line	10
+  2093                           	global	__size_of_SPI_Write
+  2094  000E                     	__size_of_SPI_Write	equ	__end_of_SPI_Write-_SPI_Write
+  2095                           	
+  2096  04BB                     _SPI_Write:	
+  2097                           	opt	stack 6
+  2098                           ; Regs used in _SPI_Write: [wreg]
+  2099                           ;SPI_Write@data_1 stored from wreg
+  2100  04BB  00F0               	movwf	(SPI_Write@data_1)
+  2101                           	line	11
+  2102                           	
+  2103  04BC                     l4949:	
+  2104                           ;SPI.c: 11: SSPBUF = data_1;
+  2105  04BC  0870               	movf	(SPI_Write@data_1),w
+  2106  04BD  1283               	bcf	status, 5	;RP0=0, select bank0
+  2107  04BE  1303               	bcf	status, 6	;RP1=0, select bank0
+  2108  04BF  0093               	movwf	(19)	;volatile
+  2109                           	line	12
+  2110                           ;SPI.c: 12: while(!SSPSTATbits.BF);
+  2111  04C0  2CC1               	goto	l1400
+  2112                           	
+  2113  04C1                     l1401:	
+  2114                           	
+  2115  04C1                     l1400:	
+  2116  04C1  1683               	bsf	status, 5	;RP0=1, select bank1
+  2117  04C2  1303               	bcf	status, 6	;RP1=0, select bank1
+  2118  04C3  1C14               	btfss	(148)^080h,0	;volatile
+  2119  04C4  2CC6               	goto	u2381
+  2120  04C5  2CC7               	goto	u2380
+  2121  04C6                     u2381:
+  2122  04C6  2CC1               	goto	l1400
+  2123  04C7                     u2380:
+  2124  04C7  2CC8               	goto	l1403
+  2125                           	
+  2126  04C8                     l1402:	
+  2127                           	line	13
+  2128                           	
+  2129  04C8                     l1403:	
+  2130  04C8  0008               	return
+  2131                           	opt stack 0
+  2132                           GLOBAL	__end_of_SPI_Write
+  2133  04C9                     	__end_of_SPI_Write:
+  2134 ;; =============== function _SPI_Write ends ============
+  2135                           
+  2136                           	signat	_SPI_Write,4216
+  2137                           	global	_Clear_LEDs
+  2138                           psect	text303,local,class=CODE,delta=2
+  2139                           global __ptext303
+  2140  04B1                     __ptext303:
+  2141                           
+  2142 ;; *************** function _Clear_LEDs *****************
+  2143 ;; Defined at:
+  2144 ;;		line 63 in file "C:\Users\Alex\Dropbox\UWE\UWE Final Year\co-design VHDL\Code\14b - Deo SPI PIC (Master)\main.c"
+  2145 ;; Parameters:    Size  Location     Type
+  2146 ;;		None
+  2147 ;; Auto vars:     Size  Location     Type
+  2148 ;;		None
+  2149 ;; Return value:  Size  Location     Type
+  2150 ;;		None               void
+  2151 ;; Registers used:
+  2152 ;;		None
+  2153 ;; Tracked objects:
+  2154 ;;		On entry : 0/0
+  2155 ;;		On exit  : 0/0
+  2156 ;;		Unchanged: 0/0
+  2157 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+  2158 ;;      Params:         0       0       0       0       0
+  2159 ;;      Locals:         0       0       0       0       0
+  2160 ;;      Temps:          0       0       0       0       0
+  2161 ;;      Totals:         0       0       0       0       0
+  2162 ;;Total ram usage:        0 bytes
+  2163 ;; Hardware stack levels used:    1
+  2164 ;; This function calls:
+  2165 ;;		Nothing
+  2166 ;; This function is called by:
+  2167 ;;		_Decode_SM
+  2168 ;;		_Send_MS
+  2169 ;; This function uses a non-reentrant model
+  2170 ;;
+  2171                           psect	text303
+  2172                           	file	"C:\Users\Alex\Dropbox\UWE\UWE Final Year\co-design VHDL\Code\14b - Deo SPI PIC (M
+                                 aster)\main.c"
+  2173                           	line	63
+  2174                           	global	__size_of_Clear_LEDs
+  2175  000A                     	__size_of_Clear_LEDs	equ	__end_of_Clear_LEDs-_Clear_LEDs
+  2176                           	
+  2177  04B1                     _Clear_LEDs:	
+  2178                           	opt	stack 6
+  2179                           ; Regs used in _Clear_LEDs: []
+  2180                           	line	64
+  2181                           	
+  2182  04B1                     l4947:	
+  2183                           ;main.c: 64: RD6 = 0;
+  2184  04B1  1283               	bcf	status, 5	;RP0=0, select bank0
+  2185  04B2  1303               	bcf	status, 6	;RP1=0, select bank0
+  2186  04B3  1308               	bcf	(70/8),(70)&7
+  2187                           	line	65
+  2188                           ;main.c: 65: RD5 = 0;
+  2189  04B4  1288               	bcf	(69/8),(69)&7
+  2190                           	line	66
+  2191                           ;main.c: 66: RD4 = 0;
+  2192  04B5  1208               	bcf	(68/8),(68)&7
+  2193                           	line	67
+  2194                           ;main.c: 67: RC7 = 0;
+  2195  04B6  1387               	bcf	(63/8),(63)&7
+  2196                           	line	68
+  2197                           ;main.c: 68: RC6 = 0;
+  2198  04B7  1307               	bcf	(62/8),(62)&7
+  2199                           	line	69
+  2200                           ;main.c: 69: RD3 = 0;
+  2201  04B8  1188               	bcf	(67/8),(67)&7
+  2202                           	line	70
+  2203                           ;main.c: 70: RD2 = 0;
+  2204  04B9  1108               	bcf	(66/8),(66)&7
+  2205                           	line	71
+  2206                           	
+  2207  04BA                     l706:	
+  2208  04BA  0008               	return
+  2209                           	opt stack 0
+  2210                           GLOBAL	__end_of_Clear_LEDs
+  2211  04BB                     	__end_of_Clear_LEDs:
+  2212 ;; =============== function _Clear_LEDs ends ============
+  2213                           
+  2214                           	signat	_Clear_LEDs,88
+  2215                           	global	_Master_Initialisation
+  2216                           psect	text304,local,class=CODE,delta=2
+  2217                           global __ptext304
+  2218  04E7                     __ptext304:
+  2219                           
+  2220 ;; *************** function _Master_Initialisation *****************
+  2221 ;; Defined at:
+  2222 ;;		line 9 in file "C:\Users\Alex\Dropbox\UWE\UWE Final Year\co-design VHDL\Code\14b - Deo SPI PIC (Master)\Master_Initi
+       lisation.c"
+  2223 ;; Parameters:    Size  Location     Type
+  2224 ;;		None
+  2225 ;; Auto vars:     Size  Location     Type
+  2226 ;;		None
+  2227 ;; Return value:  Size  Location     Type
+  2228 ;;		None               void
+  2229 ;; Registers used:
+  2230 ;;		wreg, status,2
+  2231 ;; Tracked objects:
+  2232 ;;		On entry : 0/0
+  2233 ;;		On exit  : 0/0
+  2234 ;;		Unchanged: 0/0
+  2235 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+  2236 ;;      Params:         0       0       0       0       0
+  2237 ;;      Locals:         0       0       0       0       0
+  2238 ;;      Temps:          0       0       0       0       0
+  2239 ;;      Totals:         0       0       0       0       0
+  2240 ;;Total ram usage:        0 bytes
+  2241 ;; Hardware stack levels used:    1
+  2242 ;; This function calls:
+  2243 ;;		Nothing
+  2244 ;; This function is called by:
+  2245 ;;		_main
+  2246 ;; This function uses a non-reentrant model
+  2247 ;;
+  2248                           psect	text304
+  2249                           	file	"C:\Users\Alex\Dropbox\UWE\UWE Final Year\co-design VHDL\Code\14b - Deo SPI PIC (M
+                                 aster)\Master_Initilisation.c"
+  2250                           	line	9
+  2251                           	global	__size_of_Master_Initialisation
+  2252  001A                     	__size_of_Master_Initialisation	equ	__end_of_Master_Initialisation-_Master_Initialisati
+                                 on
+  2253                           	
+  2254  04E7                     _Master_Initialisation:	
+  2255                           	opt	stack 7
+  2256                           ; Regs used in _Master_Initialisation: [wreg+status,2]
+  2257                           	line	12
+  2258                           	
+  2259  04E7                     l3957:	
+  2260                           ;Master_Initilisation.c: 12: TRISA = 0b00011111;
+  2261  04E7  301F               	movlw	(01Fh)
+  2262  04E8  1683               	bsf	status, 5	;RP0=1, select bank1
+  2263  04E9  1303               	bcf	status, 6	;RP1=0, select bank1
+  2264  04EA  0085               	movwf	(133)^080h	;volatile
+  2265                           	line	13
+  2266                           ;Master_Initilisation.c: 13: TRISB = 0b00011111;
+  2267  04EB  301F               	movlw	(01Fh)
+  2268  04EC  0086               	movwf	(134)^080h	;volatile
+  2269                           	line	14
+  2270                           ;Master_Initilisation.c: 14: TRISC = 0b00010000;
+  2271  04ED  3010               	movlw	(010h)
+  2272  04EE  0087               	movwf	(135)^080h	;volatile
+  2273                           	line	15
+  2274                           	
+  2275  04EF                     l3959:	
+  2276                           ;Master_Initilisation.c: 15: TRISD = 0b00000000;
+  2277  04EF  0188               	clrf	(136)^080h	;volatile
+  2278                           	line	17
+  2279                           	
+  2280  04F0                     l3961:	
+  2281                           ;Master_Initilisation.c: 17: PORTB = 0b00000000;
+  2282  04F0  1283               	bcf	status, 5	;RP0=0, select bank0
+  2283  04F1  1303               	bcf	status, 6	;RP1=0, select bank0
+  2284  04F2  0186               	clrf	(6)	;volatile
+  2285                           	line	18
+  2286                           	
+  2287  04F3                     l3963:	
+  2288                           ;Master_Initilisation.c: 18: PORTC = 0b00000000;
+  2289  04F3  0187               	clrf	(7)	;volatile
+  2290                           	line	19
+  2291                           	
+  2292  04F4                     l3965:	
+  2293                           ;Master_Initilisation.c: 19: PORTD = 0b00000000;
+  2294  04F4  0188               	clrf	(8)	;volatile
+  2295                           	line	24
+  2296                           	
+  2297  04F5                     l3967:	
+  2298                           ;Master_Initilisation.c: 24: RC5 = 0;
+  2299  04F5  1287               	bcf	(61/8),(61)&7
+  2300                           	line	25
+  2301                           	
+  2302  04F6                     l3969:	
+  2303                           ;Master_Initilisation.c: 25: RC4 = 1;
+  2304  04F6  1607               	bsf	(60/8),(60)&7
+  2305                           	line	26
+  2306                           	
+  2307  04F7                     l3971:	
+  2308                           ;Master_Initilisation.c: 26: RC3 = 0;
+  2309  04F7  1187               	bcf	(59/8),(59)&7
+  2310                           	line	27
+  2311                           ;Master_Initilisation.c: 27: SSPSTAT = 0b01000000;
+  2312  04F8  3040               	movlw	(040h)
+  2313  04F9  1683               	bsf	status, 5	;RP0=1, select bank1
+  2314  04FA  1303               	bcf	status, 6	;RP1=0, select bank1
+  2315  04FB  0094               	movwf	(148)^080h	;volatile
+  2316                           	line	28
+  2317                           ;Master_Initilisation.c: 28: SSPCON = 0b00100000;
+  2318  04FC  3020               	movlw	(020h)
+  2319  04FD  1283               	bcf	status, 5	;RP0=0, select bank0
+  2320  04FE  1303               	bcf	status, 6	;RP1=0, select bank0
+  2321  04FF  0094               	movwf	(20)	;volatile
+  2322                           	line	35
+  2323                           	
+  2324  0500                     l2100:	
+  2325  0500  0008               	return
+  2326                           	opt stack 0
+  2327                           GLOBAL	__end_of_Master_Initialisation
+  2328  0501                     	__end_of_Master_Initialisation:
+  2329 ;; =============== function _Master_Initialisation ends ============
+  2330                           
+  2331                           	signat	_Master_Initialisation,88
+  2332                           psect	text305,local,class=CODE,delta=2
+  2333                           global __ptext305
+  2334  0000                     __ptext305:
+  2335                           	global	btemp
+  2336  007E                     	btemp set 07Eh
+  2337                           
+  2338                           	DABS	1,126,2	;btemp
+  2339                           	global	wtemp0
+  2340  007E                     	wtemp0 set btemp
+
+
+HI-TECH Software PICC Macro Assembler V9.83 build 10920 
+Symbol Table                                                                                   Wed Mar 20 15:57:11 2013
+
+                    _SPI_Return 0035                     _SSPSTATbits 0094                              _RD 0C60  
+                            _WR 0C61                             l700 0560                             l701 0557  
+                           l702 0583                             l703 0583                             l706 04BA  
+                           l695 04CE                             l696 04D4                             l697 04D4  
+                           _GIE 005F                             _RB0 0030                             _RB1 0031  
+                           _RB2 0032                             _RB3 0033                             _RB4 0034  
+                           _RC3 003B                             _RB5 0035                             _RD2 0042  
+                           _RC4 003C                             _RD3 0043                             _RC5 003D  
+                           _RD4 0044                             _RC6 003E                             _RD5 0045  
+                           _RC7 003F                             _RD6 0046           _Master_Initialisation 04E7  
+                          l2100 0500                            l1400 04C1                            l1401 04C1  
+                          l1402 04C8                            l1403 04C8                            l1406 050D  
+                          l1407 050D                            l1408 0514                            l1409 0523  
+                          l5031 0600                            l2800 075C                            l5041 0622  
+                          l5033 0607                            l2801 0771                            l2802 0786  
+                          l2810 06A5                            l5051 0657                            l5043 062C  
+                          l5035 0609                            l5027 05F4                            l2803 079B  
+                          l2811 06BE                            l2804 07B0                            l2812 06D7  
+                          l5053 0669                            l5045 063C                            l5037 0616  
+                          l5029 05F8                            l2805 07C5                            l2813 06EF  
+                          l5301 06D7                            l2806 07FF                            l2814 072B  
+                          l5055 066D                            l5047 0647                            l5039 061E  
+                          l5231 054F                            l5311 0711                            l5303 06DD  
+                          l5049 064F                            l5161 0588                            l3633 0534  
+                          l5225 0524                            l5233 0550                            l5241 0744  
+                          l5305 06DF                            l2809 068C                            l5313 04C9  
+                          l3634 054F                            l5171 05E0                            l5163 05B0  
+                          l5227 052B                            l5235 0557                            l5251 0771  
+                          l5243 0747                            l5307 0709                            l5173 05EE  
+                          l5165 05B4                            l5229 0534                            l5237 0560  
+                          l5261 07AD                            l5253 0783                            l5245 0759  
+                          l5309 070C                            l3831 0600                            l5175 05F0  
+                          l5167 05DC                            l5159 0584                            l5271 07E0  
+                          l5263 07B0                            l5255 0786                            l5247 075C  
+                          l5239 072C                            l3840 063C                            l3832 066E  
+                          l3664 05B0                            l3841 064B                            l3833 0616  
+                          l5177 05F3                            l5169 05DE                            l3665 05DC  
+                          l5273 07E5                            l5265 07C2                            l5257 0798  
+                          l5249 076E                            l5281 067B                            l3842 0655  
+                          l3834 0609                            l3666 05F3                            l3843 066E  
+                          l3835 061D                            l5267 07C5                            l5259 079B  
+                          l5291 06AB                            l5283 068C                            l5275 066F  
+                          l3836 0634                            l3837 061E                            l3829 0608  
+                          l5269 07DD                            l5293 06AD                            l5285 0692  
+                          l5277 0675                            l3838 063B                            l3839 0647  
+                          l2799 0747                            l5295 06BE                            l5287 0694  
+                          l5279 0679                            l3961 04F0                            l5297 06C4  
+                          l5289 06A5                            l3971 04F7                            l3963 04F3  
+                          l5299 06C6                            l3965 04F4                            l3957 04E7  
+                          l3967 04F5                            l3959 04EF                            l4951 0501  
+                          l4943 05F0                            l3969 04F6                            l4953 050B  
+                          l4945 05F2                            l4947 04B1                            l4955 0514  
+                          l4949 04BC                            u3000 05B4                            u3001 05B3  
+                          u3011 05CE                            u3020 05EE                            u3012 05CF  
+                          u3100 0582                            u3021 05ED                            u3013 05D4  
+                          u3101 0581                            u3014 05D5                            u3110 0744  
+                          u3111 0743                            u3120 0759                            u3200 06AB  
+                          u3025 05EA                            u3121 0758                            u3201 06AA  
+                          u3130 076E                            u3210 06C4                            u3131 076D  
+                          u3115 0740                            u3211 06C3                            u3140 0783  
+                          u3220 06DD                            u3141 0782                            u3125 0755  
+                          u3221 06DC                            u3150 0798                            u3151 0797  
+                          u3135 076A                            u3160 07AD                            u3161 07AC  
+                          u3145 077F                            u3090 052B                            u3170 07C2  
+                          u3091 052A                            u3171 07C1                            u3155 0794  
+                          u2380 04C7                            u3180 0679                            u2381 04C6  
+                          u3165 07A9                            u3181 0678                            u2390 0513  
+                          u2710 064B                            u3190 0692                            u2391 0512  
+                          u2711 064A                            u3175 07BE                            u3191 0691  
+                          u2720 064F                            u2640 05F8                            u2721 064E  
+                          u2705 063F                            u2730 0660                            u2650 05FF  
+                          u2651 05FE                            u2740 066D                            u2670 061C  
+                          u2735 065C                            u2671 061B                            u2665 060E  
+                          u2690 063A                            u2691 0639                            u2685 062D  
+                          u2980 0588                            u2981 0587                            u2991 05A2  
+                          u2992 05A3                            u2993 05A8                            u2994 05A9  
+                          _WREN 0C62                            _main 04C9                    ___ftpack@arg 0070  
+                  ___ftpack@exp 0073                      _Clear_LEDs 04B1                            btemp 007E  
+                          start 0000                 __end_of_Send_MS 072C                           ?_main 0070  
+                         _EEADR 010D                           _CARRY 0018                           _PORTB 0006  
+                         _PORTC 0007                           _PORTD 0008                           _TRISA 0085  
+                         _TRISB 0086                           _TRISC 0087                           _TRISD 0088  
+                         _Delay 0550                   ___awtoft@sign 002B                   ___ftpack@sign 0074  
+              __end_of_SPI_Read 0524                           status 0003                           wtemp0 007E  
+            __size_of_SPI_Write 000E                    __end_of_main 04D7              __size_of_Decode_SM 00D4  
+        ?_Master_Initialisation 0070                          ??_main 007E                          ?_Delay 002C  
+                        _EEDATA 010C                          _EECON1 018C                          _EECON2 018D  
+              __end_of___awtoft 0550                __end_of___ftpack 066F                          Delay@a 002F  
+                        _SSPCON 0014                          _SSPBUF 0013                     ?_Clear_LEDs 0070  
+                     ??_Send_MS 007E                          ___ftge 0584               __end_of_SPI_Write 04C9  
+             __end_of_Decode_SM 0800                      ___ftge@ff1 0078                      ___ftge@ff2 007B  
+                    ___awtoft@c 0026                   __end_of_Delay 0584                  __pcstackCOMMON 0070  
+                     ?_SPI_Read 0070                 Delay@delay_time 002C             __size_of_Clear_LEDs 000A  
+                       ??_Delay 007E                      __pbssBANK0 0035                      __pmaintext 04C9  
+                       ?___ftge 0078                       ?___awtoft 0026                       ?___ftpack 0070  
+                    ??_SPI_Read 0070                         _SSPSTAT 0094                      _left_joy_h 0039  
+                    _left_joy_v 003D                         _Send_MS 066F                 __size_of___ftge 0070  
+       ??_Master_Initialisation 0070                      ??___awtoft 0029                      ??___ftpack 0075  
+          end_of_initialization 04E3                    ??_Clear_LEDs 0070              __end_of_Clear_LEDs 04BB  
+                     _SPI_Write 04BB                       _Decode_SM 072C                  __end_of___ftge 05F4  
+             __size_of_SPI_Read 0023                       Send_MS@DT 0033             start_initialization 04D7  
+                    ?_SPI_Write 0070                      ?_Decode_SM 0070                 SPI_Write@data_1 0070  
+                      ??___ftge 0020               __size_of___awtoft 002C               __size_of___ftpack 007B  
+                 __pcstackBANK0 0020                        ?_Send_MS 0070                       __ptext300 05F4  
+                     __ptext301 0501                       __ptext302 04BB                       __ptext303 04B1  
+                     __ptext304 04E7                       __ptext305 0000                       __ptext294 0000  
+                     __ptext295 066F                       __ptext296 072C                       __ptext297 0550  
+                     __ptext298 0524                       __ptext299 0584  __size_of_Master_Initialisation 001A  
+ __end_of_Master_Initialisation 0501                  __size_of_Delay 0034                     ??_SPI_Write 0070  
+                   ??_Decode_SM 007E                     Decode_SM@DT 0031                        _SPI_Read 0501  
+              __size_of_Send_MS 00BD                        ___awtoft 0524                        ___ftpack 05F4  
+                 __size_of_main 000E  
